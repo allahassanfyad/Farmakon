@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:weightSum="1">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_15sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Categories"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"/>
+
+                <TextView
+                    android:id="@+id/txtSeeAllCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/colorDarkerGray"
+                    android:text="see all"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"/>
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/category_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_110sdp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="1.4dp"
+                    app:sliderIndicatorSelectedColor="@color/colorPrimary"
+                    app:sliderIndicatorUnselectedColor="@color/colorPrimaryLight"
+                    app:sliderScrollTimeInSec="1"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    app:sliderStartAutoCycle="true" />
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:weightSum="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_15sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Pharmakon Selection"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"/>
+
+                <TextView
+                    android:id="@+id/txtSeeAllSelection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/colorDarkerGray"
+                    android:text="see all"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:orientation="horizontal"
+                    />
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcySelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/category_item"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

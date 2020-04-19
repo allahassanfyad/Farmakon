@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_150sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:weightSum="1">
+
+
+        <TextView
+            android:id="@+id/txtDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:text="X"
+            android:textColor="@color/colorw"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".7"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:gravity="center_vertical">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view2"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@color/colorw"
+            android:innerRadius="0dp"
+            android:shape="oval"
+            android:thicknessRatio="2"
+            app:cardBackgroundColor="@color/colorw"
+            app:cardCornerRadius="@dimen/_30sdp"
+           android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_56sdp"
+                android:layout_height="@dimen/_56sdp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:innerRadius="0dp"
+                android:padding="2dp"
+                android:shape="oval"
+                android:thicknessRatio="2"
+                app:cardCornerRadius="@dimen/_28sdp">
+
+
+                <ImageView
+                    android:id="@+id/imgPersonalInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/images" />
+            </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:textColor="@color/colorw"
+            android:textSize="@dimen/_20sdp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>

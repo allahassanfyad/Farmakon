@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".ScenarioFarmakon.ScenarioAddAddress.Controller.Add_Address">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="Add Delivery Address"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_17sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="@color/colorDarkerGray"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <EditText
+                    android:id="@+id/editAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:backgroundTint="@color/colorLighterYellow"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines="3"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:textColor="@color/colorb"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address name"
+                    android:textColor="@color/colorDarkerGray"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <EditText
+                    android:id="@+id/editAddressName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:backgroundTint="@color/colorLighterYellow"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorb"
+                    android:textSize="@dimen/_11sdp"
+                    android:inputType="text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bulding / Villa NO"
+                    android:textColor="@color/colorDarkerGray"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <EditText
+                    android:id="@+id/editBuldingNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:backgroundTint="@color/colorLighterYellow"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorb"
+                    android:textSize="@dimen/_11sdp"
+                    android:inputType="number"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Floor NO"
+                    android:textColor="@color/colorDarkerGray"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <EditText
+                    android:id="@+id/editFloorNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:backgroundTint="@color/colorLighterYellow"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorb"
+                    android:textSize="@dimen/_11sdp"
+                    android:inputType="number"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Apartment NO"
+                    android:textColor="@color/colorDarkerGray"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <EditText
+                    android:id="@+id/editApartmentNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:backgroundTint="@color/colorLighterYellow"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorb"
+                    android:textSize="@dimen/_11sdp"
+                    android:inputType="number"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Notes"
+                    android:textColor="@color/colorDarkerGray"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <EditText
+                    android:id="@+id/editAddressNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@drawable/linear_stok"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:maxLines="5"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorb"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"
+                    android:inputType="textCapSentences|textMultiLine"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/btnSaveAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/raduis_all"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="SAVE ADDRESS"
+                    android:textColor="@color/colorw"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

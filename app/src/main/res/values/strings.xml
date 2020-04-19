@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Farmakon</string>
+
+
+    <string-array name="payment_method">
+        <item>Cash</item>
+        <item>PayPal</item>
+        <item>VISA</item>
+    </string-array>
+</resources>

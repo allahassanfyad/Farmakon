@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".ScenarioFarmakon.ScenarioHome.Controller.SignIn">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".23"
+        android:background="@drawable/background_header" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".77"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_weight=".3"
+            android:scaleX=".9"
+            android:scaleY=".9"
+            android:src="@drawable/splash_logo" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".12"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:weightSum="1">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:gravity="center_vertical"
+                android:text="Enter your phone number"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_14sdp"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="to you on "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14sdp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="+20 01004646198"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight=".08"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="activation code"
+            android:textColor="@color/colorb"
+            android:textSize="@dimen/_15sdp"/>
+
+
+        <com.github.cirno_poi.verifyedittextlibrary.VerifyEditText
+            android:id="@+id/verifyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".13"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:paddingTop="10dp"
+            android:theme="@style/Theme.MyTheme"
+            app:defaultColor="@color/colorLightGray"
+            app:focusColor="@color/colorPrimary"
+            app:inputCount="4"
+            app:inputSpace="@dimen/_10sdp"
+            android:layoutDirection="ltr"
+            app:mTextSize="@dimen/_7sdp"
+            app:underlineHeight="3dp"
+            app:underlineSpace="@dimen/_5sdp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_weight=".1"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I did not receive the activation code. "
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/colorb"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/txtResendIt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="please resend it"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/colorLightBlue"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".27"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
+
+
+            <Button
+                android:id="@+id/btnActivationContinue"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:background="@drawable/raduis_all_gradiant"
+                android:text="continue"
+                android:textColor="@color/colorw"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

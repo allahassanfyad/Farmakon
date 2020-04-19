@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.application.farmakon">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ScenarioFarmakon.ScenarioCheckout.Controller.checkout"></activity>
+        <activity android:name=".ScenarioFarmakon.ScenarioVouchers.Controller.Vouchers" />
+        <activity android:name=".ScenarioFarmakon.ScenarioPrevouisOrders.Controller.Previous_Orders" />
+        <activity android:name=".ScenarioFarmakon.ScenarioPersonalInfo.Controller.Personal_Info" />
+        <activity android:name=".ScenarioFarmakon.ScenarioAddAddress.Controller.Add_Address" />
+        <activity android:name=".ScenarioFarmakon.ScenarioAddress.Controller.Address" />
+        <activity android:name=".ScenarioFarmakon.ScenarioFAQ.Controller.FAQ" />
+        <activity android:name=".ScenarioFarmakon.ScenarioAboutUs.Controller.About_Us" />
+        <activity android:name=".ScenarioFarmakon.ScenarioCart.Controller.Cart" />
+        <activity android:name=".ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details" />
+        <activity android:name=".ScenarioFarmakon.ScenarioProducts.Controller.Products" />
+        <activity android:name=".ScenarioFarmakon.ScenarioAllCategory.Controller.All_Category" />
+        <activity android:name=".ScenarioFarmakon.ScenarioHome.Controller.Activation_Code" />
+        <activity android:name=".ScenarioFarmakon.ScenarioHome.Controller.Home" />
+        <activity android:name=".ScenarioFarmakon.ScenarioHome.Controller.Register" />
+        <activity android:name=".ScenarioFarmakon.ScenarioHome.Controller.SignIn" />
+        <activity android:name=".ScenarioFarmakon.ScenarioHome.Controller.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ScenarioFarmakon.ScenarioMain.Controller.MainActivity" />
+    </application>
+
+</manifest>

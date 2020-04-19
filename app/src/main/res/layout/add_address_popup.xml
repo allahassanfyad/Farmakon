@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:background="@drawable/raduis_all_extra_slim">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:src="@drawable/img_no_address"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:scaleY="1.4"
+        android:scaleX="1.4"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btnLocate"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/raduis_all_extra_slim"
+            android:backgroundTint="@color/colorLighterYellow"
+            android:text="Auto Locate"
+            android:textColor="@color/colorw"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold"/>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".1"
+            android:gravity="center"
+            android:text="OR"
+            android:textStyle="bold"
+            android:textColor="@color/colorDarkerGray"
+            android:textSize="@dimen/_14sdp" />
+
+        <Button
+            android:id="@+id/btnSetManually"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/raduis_all_extra_slim"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Set Manually"
+            android:textColor="@color/colorw"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold"/>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

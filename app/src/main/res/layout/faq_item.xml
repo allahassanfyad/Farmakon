@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_38sdp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+
+            <ImageView
+                android:id="@+id/imgFaq"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:src="@drawable/faq_arrow"
+                 />
+
+
+            <TextView
+                android:id="@+id/expand_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:text="What 3rd-party applicationsWhat 3rd-party applications What 3rd-party applications"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:scaleX=".9"
+                android:scaleY=".9"
+                android:src="@drawable/faq_item_img"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            app:el_duration="100"
+            app:el_expanded="true"
+
+            >
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:text="Content"
+                />
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ScenarioFarmakon.ScenarioAboutUs.Controller.About_Us">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_235sdp"
+            android:background="@drawable/bg_about" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:weightSum="1">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="About Pharma"
+                        android:textColor="@color/colorw"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="kon"
+                        android:textColor="@color/colorLightYellow"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@color/colorw"
+                    android:innerRadius="0dp"
+                    android:shape="oval"
+                    android:thicknessRatio="2"
+                    app:cardBackgroundColor="@color/colorw"
+                    app:cardCornerRadius="@dimen/_20sdp">
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_about" />
+
+                </androidx.cardview.widget.CardView>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Pharma"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_17sdp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="kon"
+                        android:textColor="@color/colorLightYellow"
+                        android:textSize="@dimen/_17sdp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text=" first application that combines"
+                        android:textColor="@color/colorDarkerGray"
+                        android:textSize="@dimen/_13sdp"
+                        />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="simplicity , accuracy and speed in serving everyone and larg geographical coverage that includes all the governorates of egypt to deliver medicines , medecal supplies and cosmetics to everyone who requests them with unrealized prices and for the beneficiaries to enjoy realistic cash offers"
+                    android:textColor="@color/colorDarkerGray"
+                    android:textSize="@dimen/_13sdp"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</LinearLayout>
