@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
+import com.application.farmakon.ScenarioFarmakon.ScenarioAllCategory.Model.ModelDatum;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Products;
 import com.application.farmakon.Utils.TinyDB;
@@ -23,11 +24,11 @@ public class RcyAllCategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 {
 
     TinyDB tinyDB;
-    List<Category_Model> mMainGridList;
+    List<ModelDatum> mMainGridList;
     Context mContext;
 
 
-    public RcyAllCategoryAdapter(List<Category_Model> songsList, Context context) {
+    public RcyAllCategoryAdapter(List<ModelDatum> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -53,21 +54,26 @@ public class RcyAllCategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final Category_Model catrgory  = mMainGridList.get(position);
+        final ModelDatum catrgory  = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
 
 
-        mainHolder.textname.setText(catrgory.getCategory_name());
+        mainHolder.textname.setText(catrgory.getTitle());
 
         Glide.with(mContext)
-                .load(catrgory.getImg_category())
+                .load(catrgory.getImage())
                 .placeholder(R.drawable.img)
                 .into(mainHolder.imageView);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                tinyDB = new TinyDB(mContext);
+
+                tinyDB.putString("categoryID", String.valueOf(mMainGridList.get(position).getId()));
 
                 mContext.startActivity(new Intent(mContext, Products.class));
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryDatum;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.Products_model;
 import com.application.farmakon.Utils.TinyDB;
 import com.bumptech.glide.Glide;
@@ -24,11 +25,11 @@ public class RcyProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 {
 
     TinyDB tinyDB;
-    List<Products_model> mMainGridList;
+    List<ModelCategoryDatum> mMainGridList;
     Context mContext;
 
 
-    public RcyProductsAdapter(List<Products_model> songsList, Context context) {
+    public RcyProductsAdapter(List<ModelCategoryDatum> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -54,43 +55,51 @@ public class RcyProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final Products_model catrgory  = mMainGridList.get(position);
+        final ModelCategoryDatum catrgory  = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
 
         mainHolder.texttitle.setText(catrgory.getTitle());
-        mainHolder.textdescription.setText(catrgory.getDiscription());
+        mainHolder.textdescription.setText(catrgory.getDescription());
         mainHolder.textprice.setText(catrgory.getPrice());
 
-        if (catrgory.getPercentageDiscount().equals("0")){
+//        if (catrgory.getPercentageDiscount().equals("0")){
+//
+//            mainHolder.linearpricepercentage.setVisibility(View.GONE);
+//
+//        }else {
+//
+//            mainHolder.linearpricepercentage.setVisibility(View.VISIBLE);
+//            mainHolder.textdiscountpercentage.setText(catrgory.getPercentageDiscount());
+//        }
 
-            mainHolder.linearpricepercentage.setVisibility(View.GONE);
 
-        }else {
-
-            mainHolder.linearpricepercentage.setVisibility(View.VISIBLE);
-            mainHolder.textdiscountpercentage.setText(catrgory.getPercentageDiscount());
-        }
-
-
-        if (catrgory.getPriceDiscount().equals("0")){
-
-            mainHolder.lineapricediscount.setVisibility(View.GONE);
-
-        }else {
-
-            mainHolder.lineapricediscount.setVisibility(View.VISIBLE);
-            mainHolder.textpricediscount.setText(catrgory.getPriceDiscount());
-        }
+//        if (catrgory.getPriceDiscount().equals("0")){
+//
+//            mainHolder.lineapricediscount.setVisibility(View.GONE);
+//
+//        }else {
+//
+//            mainHolder.lineapricediscount.setVisibility(View.VISIBLE);
+//            mainHolder.textpricediscount.setText(catrgory.getPriceDiscount());
+//        }
 
         Glide.with(mContext)
-                .load(catrgory.getImg())
+                .load(catrgory.getImage())
                 .placeholder(R.drawable.img)
                 .into(mainHolder.imageView);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                tinyDB.putString("product_description",catrgory.getDescription());
+                tinyDB.putString("product_image",catrgory.getImage());
+                tinyDB.putString("product_price",catrgory.getPrice());
+                tinyDB.putString("product_title",catrgory.getTitle());
+                tinyDB.putString("product_id", String.valueOf(catrgory.getId()));
+
 
                 mContext.startActivity(new Intent(mContext, Product_Details.class));
 

@@ -87,6 +87,7 @@
                     android:orientation="horizontal"
                     android:background="@color/colorOrange"
                     android:layout_weight=".4"
+                    android:visibility="gone"
                     >
 
 
@@ -95,7 +96,8 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:gravity="center"
-                        android:weightSum="1">
+                        android:weightSum="1"
+                        >
 
                         <TextView
                             android:id="@+id/txtProductPriceDiscountPercentage"
@@ -205,7 +207,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:orientation="horizontal"
-                        android:weightSum="1">
+                        android:weightSum="1"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/txtProductPriceDiscount"

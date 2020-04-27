@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.MainActivity;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Model.Notification_Model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Pattrens.RcyNotificationAdapter;
@@ -32,6 +33,7 @@ public class Fragment_Notification extends Fragment {
         view = inflater.inflate(R.layout.notification_fragment, container, false);
 
         recyclerView = view.findViewById(R.id.rcyNotification);
+        MainActivity.lineartoolbar.setVisibility(View.VISIBLE);
 
         int[] imgNotification ={R.drawable.images,R.drawable.images, R.drawable.images,
                 R.drawable.images,R.drawable.images,R.drawable.images,R.drawable.images,R.drawable.images,R.drawable.images,

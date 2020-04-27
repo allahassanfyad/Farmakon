@@ -30,6 +30,11 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
 import com.application.farmakon.ScenarioFarmakon.ScenarioVouchers.Controller.Vouchers;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,12 +44,19 @@ public class MainActivity extends AppCompatActivity {
     public static LinearLayout lineartoolbar;
     DrawerLayout drawerLayout;
     TextView txtdissmiss;
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         navigation = findViewById(R.id.navigation);
         fragmentManager = getSupportFragmentManager();
@@ -61,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
         }else {
 
-            Fragment_Home home = new Fragment_Home();
-            loadFragment(home);
+            FragmentTransaction fr = MainActivity.this.getSupportFragmentManager().beginTransaction();
+            fr.replace(R.id.fragment_container, new Fragment_Home(), "Home_Fragment");
+            fr.addToBackStack(null);
+            fr.commit();
             navigation.setSelectedItemId(R.id.icon_home);
 
         }
@@ -77,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.icon_home:
 
-                        Fragment_Home home = new Fragment_Home();
-                        loadFragment(home);
+                        FragmentTransaction fr = MainActivity.this.getSupportFragmentManager().beginTransaction();
+                        fr.replace(R.id.fragment_container, new Fragment_Home(), "Home_Fragment");
+                        fr.addToBackStack(null);
+                        fr.commit();
                         lineartoolbar.setVisibility(View.GONE);
                         return true;
 
@@ -350,4 +366,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+    public void onChooseFile(View v) {
+
+        CropImage.activity()
+                .setMaxCropResultSize(10000, 10000)
+                .setCropShape(CropImageView.CropShape.RECTANGLE)
+                .start(this);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("Home_Fragment");
+        fragment.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

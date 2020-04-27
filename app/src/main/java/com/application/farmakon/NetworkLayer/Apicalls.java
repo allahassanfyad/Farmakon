@@ -33,9 +33,9 @@ public class Apicalls
      * @func User Login
      */
 
-    public void loginUser(final String email, final String password, final String  mob_token) {
+    public void loginUser(final String phone, final String platform, final String  mobile_token,final String password) {
 
-        apiRouter.performRequest(Apiclient.LOGIN_USER.getURL(),Apiclient.LOGIN_USER.getParams(), Arrays.asList(email,password,mob_token), Request.Method.POST,Apiclient.LOGIN_USER.getCode());
+        apiRouter.performRequest(Apiclient.LOGIN_USER.getURL(),Apiclient.LOGIN_USER.getParams(), Arrays.asList(phone,platform,mobile_token,password), Request.Method.POST,Apiclient.LOGIN_USER.getCode());
 
     }
 
@@ -48,10 +48,10 @@ public class Apicalls
      * @func User Registration
      */
 
-    public void registerUser(final String Name, final String Phone, final String Email, final String Password, final String Platform,final String Image_Url,final String Lang,final String Mobile_Token)
+    public void login_with_facebook(final String email, final String password, final String mobile_token)
     {
 
-        apiRouter.performRequest(Apiclient.Register_Uer.getURL(),Apiclient.Register_Uer.getParams(), Arrays.asList(Name,Phone,Email,Password,Platform,Image_Url,Lang,Mobile_Token), Request.Method.POST,Apiclient.Register_Uer.getCode());
+        apiRouter.performRequest(Apiclient.LOGIN_WITH_FACEBOOK.getURL(),Apiclient.LOGIN_WITH_FACEBOOK.getParams(), Arrays.asList(email,password,mobile_token), Request.Method.POST,Apiclient.LOGIN_WITH_FACEBOOK.getCode());
 
 
     }
@@ -60,16 +60,38 @@ public class Apicalls
 
 
 
+
+    /**
+     *
+     * @func User Registration
+     */
+
+    public void register_with_facebook(final String name, final String phone, final String email,final String password, final String platform, final String image_url,final String mobile_token)
+    {
+
+        apiRouter.performRequest(Apiclient.REGISTER_WITH_FACEBOOK.getURL(),Apiclient.REGISTER_WITH_FACEBOOK.getParams(), Arrays.asList(name,phone,email,password,platform,image_url,mobile_token), Request.Method.POST,Apiclient.REGISTER_WITH_FACEBOOK.getCode());
+
+
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+
+
     /**
      *
      * @func Edit User Profile
      */
 
-    public  void get_all_branches ()
+    public  void update_personal_info (final String email, final String name, final String gender,final String dob, final String lang)
     {
 
-//        apiRouter.performRequest(Apiclient.GET_ALL_BRANCHES.getURL(),Apiclient.GET_ALL_BRANCHES.getParams(),null, Request.Method.GET,Apiclient.GET_ALL_BRANCHES.getCode());
-
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.UPDATE_PERSONAL_INFO.getURL(),Request.Method.POST,Apiclient.UPDATE_PERSONAL_INFO.getParams(),Arrays.asList(email,name,gender,dob,lang), null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -80,65 +102,12 @@ public class Apicalls
      * @func Add a new Ad
      */
 
-    public  void get_Payment_Info ()
-    {
-
-        apiRouter.performRequest(Apiclient.PAYMENT_INFO.getURL(),Apiclient.PAYMENT_INFO.getParams(),null, Request.Method.GET,Apiclient.PAYMENT_INFO.getCode());
-
-    }
-
-    //----------------------------------------------------------------------------------------------
-
-
-    /**
-     *
-     * @func Main Activity Ads
-     *
-     */
-
-    public void get_products ()
-    {
-
-        apiRouter.performRequest(Apiclient.PRODUCTS.getURL(),Apiclient.PRODUCTS.getParams(),null, Request.Method.GET, Apiclient.PRODUCTS.getCode());
-
-    }
-
-    //----------------------------------------------------------------------------------------------
-
-
-    /**
-     *
-     * @func Main Activity Ads
-     *
-     */
-
-
-    public void get_Payment_Merhod (final String sub_total,final String tax,final String discount,final String delivery,final String total,final String order_id,final String payment_method )
-    {
-
-        try {
-            apiRouter.makeAdvancedRequest(Apiclient.PAYMENT_METHOD.getURL(),Request.Method.POST,Apiclient.PAYMENT_METHOD.getParams(),Arrays.asList(sub_total,tax,discount,delivery,total,order_id,payment_method), null);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    //----------------------------------------------------------------------------------------------
-
-    /**
-     *
-     * @func Main Activity Ads
-     *
-     */
-
-    public void get_My_Order_Details (final String order_id)
+    public  void get_all_category ()
     {
 
         try {
 
-            apiRouter.makeAdvancedRequest(Apiclient.MY_ORDERS_DETAILS.getURL(),Request.Method.POST,Apiclient.MY_ORDERS_DETAILS.getParams(),Collections.singletonList(order_id), null);
+            apiRouter.makeAdvancedRequest(Apiclient.ALL_CATEGORIES.getURL(),Request.Method.GET,Apiclient.ALL_CATEGORIES.getParams(),null, null);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -154,11 +123,76 @@ public class Apicalls
      *
      */
 
-    public void get_Bank_Tranfer (final String order_id,final String bank_name,final String owner_name,final String account_number,final String amount,final String image_url)
+    public void category_product (final String category_id)
+    {
+
+
+        try {
+
+            apiRouter.makeAdvancedRequest(Apiclient.CATEGORY_PRODUCT.getURL(),Request.Method.POST,Apiclient.CATEGORY_PRODUCT.getParams(),Collections.singletonList(category_id), null);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    /**
+     *
+     * @func Main Activity Ads
+     *
+     */
+
+
+    public void add_address (final String address_name,final String address_details,final String building,final String floor,final String apartment,final String notes)
     {
 
         try {
-            apiRouter.makeAdvancedRequest(Apiclient.BANK_TRANSFER.getURL(),Request.Method.POST,Apiclient.BANK_TRANSFER.getParams(),Arrays.asList(order_id,bank_name,owner_name,account_number,amount,image_url), null);
+            apiRouter.makeAdvancedRequest(Apiclient.ADD_ADDRESS.getURL(),Request.Method.POST,Apiclient.ADD_ADDRESS.getParams(),Arrays.asList(address_name,address_details,building,floor,apartment,notes), null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     *
+     * @func Main Activity Ads
+     *
+     */
+
+    public void add_location (final String address,final String lat,final String lang)
+    {
+
+        try {
+
+            apiRouter.makeAdvancedRequest(Apiclient.ADD_LOCATION.getURL(),Request.Method.POST,Apiclient.ADD_LOCATION.getParams(),Arrays.asList(address,lat,lang), null);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    /**
+     *
+     * @func Main Activity Ads
+     *
+     */
+
+    public void send_order (final String products,final String image_urls,final String notes,final String address_id)
+    {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.SEN_ORDER.getURL(),Request.Method.POST,Apiclient.SEN_ORDER.getParams(),Arrays.asList(products,image_urls,notes,address_id), null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -175,7 +209,7 @@ public class Apicalls
      *
      */
 
-    public void get_My_Order ()
+    public void My_Order ()
     {
         try {
 
@@ -196,10 +230,10 @@ public class Apicalls
      *
      */
 
-    public void sendOrder (final JSONObject items)
+    public void faq ()
     {
         try {
-            apiRouter.makeAdvancedRequest2(Apiclient.SEND_ORDER.getURL(),Request.Method.POST,Apiclient.SEND_ORDER.getParams(),items,null);
+            apiRouter.makeAdvancedRequest(Apiclient.FAQ.getURL(),Request.Method.GET,Apiclient.FAQ.getParams(),null,null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -213,17 +247,32 @@ public class Apicalls
 
 
 
-    public void get_Verfication_Register (final String user_id,final String code)
+    public void get_personal_info ()
     {
 
         try {
-            apiRouter.makeAdvancedRequest(Apiclient.REGISTER_CONFIRMATION.getURL(),Request.Method.POST,Apiclient.REGISTER_CONFIRMATION.getParams(),Arrays.asList(user_id,code), null);
+            apiRouter.makeAdvancedRequest(Apiclient.GET_PERSONAL_INFO.getURL(),Request.Method.GET,Apiclient.GET_PERSONAL_INFO.getParams(),null, null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     //----------------------------------------------------------------------------------------------
+
+
+
+    public void get_user_address ()
+    {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.GET_USER_ADDRESS.getURL(),Request.Method.GET,Apiclient.GET_USER_ADDRESS.getParams(),null, null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
 
 
 

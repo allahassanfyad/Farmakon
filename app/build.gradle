@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
+
 
 
 android {
@@ -109,5 +111,13 @@ dependencies {
     //expendable TextView for FAQ
     implementation 'com.ms-square:expandableTextView:0.1.4'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+    // Add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.3'
+
+    // Add Firebase
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
 
 }

@@ -6,6 +6,11 @@
     android:background="@color/colorPrimary"
     android:weightSum="1">
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_75sdp"
@@ -16,6 +21,7 @@
 
 
         <ImageView
+            android:id="@+id/imgCartProductPhoto"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@drawable/icon_upload_photo"
@@ -36,6 +42,7 @@
             >
 
             <TextView
+                android:id="@+id/txtCartProductTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -56,6 +63,7 @@
 
 
                 <TextView
+                    android:id="@+id/txtCartProductPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
@@ -103,6 +111,7 @@
 
 
                     <TextView
+                        android:id="@+id/txtCartProductDecrease"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="match_parent"
                         android:textSize="@dimen/_15sdp"
@@ -120,6 +129,7 @@
 
 
                         <TextView
+                            android:id="@+id/txtCartProductNumber"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="100"
@@ -136,6 +146,7 @@
 
 
                     <TextView
+                        android:id="@+id/txtCartProductIncrease"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="match_parent"
                         android:textSize="@dimen/_14sdp"
@@ -167,6 +178,21 @@
         </LinearLayout>
 
     </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDeleteItem"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorw"
+            android:textStyle="bold"
+            android:textSize="@dimen/_17sdp"
+            android:text="X"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

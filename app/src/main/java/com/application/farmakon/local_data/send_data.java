@@ -25,11 +25,11 @@ public class send_data {
     }
 
 
-    public static void CART_DELIVARY(Context context, String delivary)
+    public static void user_id(Context context, String user_id)
     {
-        SharedPreferences sharedPreferences=context.getSharedPreferences("delivary",MODE_PRIVATE);
+        SharedPreferences sharedPreferences=context.getSharedPreferences("user_id",MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("delivary", delivary);
+        editor.putString("user_id", user_id);
         editor.commit();
     }
 

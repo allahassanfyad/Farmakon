@@ -20,11 +20,11 @@ public class saved_data {
         return discountpercentage;
     }
 
-    public static String get_Delevary(Context context)
+    public static String get_user_id(Context context)
     {
-        SharedPreferences sharedPreferences=context.getSharedPreferences("delivary",MODE_PRIVATE);
-        String delivary=sharedPreferences.getString("delivary","0");
-        return delivary;
+        SharedPreferences sharedPreferences=context.getSharedPreferences("user_id",MODE_PRIVATE);
+        String user_id=sharedPreferences.getString("user_id","0");
+        return user_id;
     }
 
 

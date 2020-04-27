@@ -8,6 +8,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.application.farmakon.local_data.saved_data;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -155,7 +157,7 @@ public class APIRouter {
                 final HashMap<String, String> header = new HashMap<>();
                 header.put("Accept", "application/json");
                 header.put("Content-Type", "application/json");
-                header.put("Authorization", "Bearer ");
+                header.put("Authorization", "Bearer " + saved_data.get_token(context));
                 return header;
             }
 

@@ -95,6 +95,7 @@
 
 
                         <TextView
+                            android:id="@+id/txtDeliveryTime"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -184,6 +185,7 @@
 
 
                     <TextView
+                        android:id="@+id/txtCheckoutAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -193,6 +195,7 @@
                         android:gravity="center_vertical"/>
 
                     <TextView
+                        android:id="@+id/txtCheckoutPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_15sdp"
@@ -281,6 +284,7 @@
 
 
                     <TextView
+                        android:id="@+id/txtCheckoutPhotoCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -313,6 +317,7 @@
 
 
                         <TextView
+                            android:id="@+id/txtCheckoutItemCount"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight=".5"
@@ -355,6 +360,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/txtExpectedDeliveryTime"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight=".2"
@@ -394,6 +400,7 @@
 
 
                         <TextView
+                            android:id="@+id/txtCheckoutTotal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="2500"
@@ -405,6 +412,7 @@
                             android:visibility="gone"/>
 
                             <TextView
+                                android:id="@+id/txtCheckoutNoTotal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="(price specfed upon delivary)"

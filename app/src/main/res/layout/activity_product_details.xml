@@ -67,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:text="55000.00"
+                            android:text="0"
                             android:textColor="@color/colorw"
                             android:textSize="@dimen/_15sdp"
                             android:textStyle="bold" />
@@ -109,7 +109,7 @@
 
 
                         <ImageView
-                            android:id="@+id/imgPersonalInfo"
+                            android:id="@+id/imgCart"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="2dp"
@@ -175,7 +175,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                android:text="panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold panadol cold "
+                android:text=""
                 android:textColor="@color/colorDarkerGray"
                 android:textSize="@dimen/_13sdp" />
 

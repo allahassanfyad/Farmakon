@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioAddress.Model.Address_Model;
+import com.application.farmakon.ScenarioFarmakon.ScenarioAddress.Model.ModelGetAddressDatum;
 import com.application.farmakon.Utils.TinyDB;
 
 import java.util.List;
@@ -19,11 +20,11 @@ public class RcySavedPlacesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 {
 
     TinyDB tinyDB;
-    List<Address_Model> mMainGridList;
+    List<ModelGetAddressDatum> mMainGridList;
     Context mContext;
 
 
-    public RcySavedPlacesAdapter(List<Address_Model> songsList, Context context) {
+    public RcySavedPlacesAdapter(List<ModelGetAddressDatum> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -49,13 +50,13 @@ public class RcySavedPlacesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final Address_Model address_model = mMainGridList.get(position);
+        final ModelGetAddressDatum address_model = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
 
 
-        mainHolder.textaddress.setText(address_model.getAddress());
+        mainHolder.textaddress.setText(address_model.getAddressName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

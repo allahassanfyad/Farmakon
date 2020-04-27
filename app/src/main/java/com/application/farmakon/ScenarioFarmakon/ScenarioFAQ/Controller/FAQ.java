@@ -5,36 +5,97 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
+import com.android.volley.VolleyError;
+import com.application.farmakon.NetworkLayer.Apicalls;
+import com.application.farmakon.NetworkLayer.NetworkInterface;
+import com.application.farmakon.NetworkLayer.ResponseModel;
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Model.FAQ_Group1_Model;
+import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Model.ModelFAQDatum;
+import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Model.ModelFAQQuestion;
 import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Pattrens.FAQ_Group1_Adapter;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryDatum;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FAQ extends AppCompatActivity {
+public class FAQ extends AppCompatActivity implements NetworkInterface {
+
+
+    RecyclerView recyclerView;
+    List<ModelFAQDatum> faqGroup1ModelList = new ArrayList<>();
+    LinearLayout loading;
+    ModelFAQDatum[] faqdata;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
 
+        loading = findViewById(R.id.loading);
+
+//        String question[] ={"What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications"};
+//        String answer[] ={"Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev"};
+//
+//
+//        for (int i = 0; i<question.length; i++)
+//        {
+//            FAQ_Group1_Model faq_group1_model = new FAQ_Group1_Model(question[i],answer[i]);
+//            faqGroup1ModelList.add(faq_group1_model);
+//
+//        }
+
+        loading.setVisibility(View.VISIBLE);
+        new Apicalls(FAQ.this,FAQ.this).faq();
 
 
-        String question[] ={"What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications"};
-        String answer[] ={"Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev"};
 
-        List<FAQ_Group1_Model> faqGroup1ModelList = new ArrayList<>();
-        for (int i = 0; i<question.length; i++)
-        {
-            FAQ_Group1_Model faq_group1_model = new FAQ_Group1_Model(question[i],answer[i]);
-            faqGroup1ModelList.add(faq_group1_model);
+
+
+    }
+
+    @Override
+    public void OnStart() {
+
+    }
+
+    @Override
+    public void OnResponse(ResponseModel model) {
+        loading.setVisibility(View.GONE);
+
+        Gson gson = new Gson();
+        ModelFAQQuestion faqQuestion = gson.fromJson(String.valueOf(model.getJsonObject()),ModelFAQQuestion.class);
+        faqdata = faqQuestion.getData();
+
+        for (int i =0; i<faqdata.length; i++){
+
+            ModelFAQDatum datum = new ModelFAQDatum();
+
+            datum.setAnswer(faqdata[i].getAnswer());
+            datum.setId(faqdata[i].getId());
+            datum.setQuestion(faqdata[i].getQuestion());
+
+            faqGroup1ModelList.add(datum);
 
         }
+
         //Group1
-        RecyclerView recyclerView1 = findViewById(R.id.rcyFaqGroup);
-        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView1.setAdapter(new FAQ_Group1_Adapter(recyclerView1,faqGroup1ModelList));
+        recyclerView = findViewById(R.id.rcyFaqGroup);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new FAQ_Group1_Adapter(recyclerView,faqGroup1ModelList));
+
+    }
+
+    @Override
+    public void OnError(VolleyError error) {
+        loading.setVisibility(View.GONE);
+        Log.e("FAQ_error",""+error.toString());
+
     }
 }
