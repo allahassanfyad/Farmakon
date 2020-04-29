@@ -209,7 +209,7 @@ public class Apicalls
      *
      */
 
-    public void My_Order ()
+    public void get_my_Orders ()
     {
         try {
 
@@ -285,6 +285,19 @@ public class Apicalls
             e.printStackTrace();
         }
 
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    public void get_home ()
+    {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.GET_HOME.getURL(),Request.Method.GET,Apiclient.GET_HOME.getParams(),null, null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     //----------------------------------------------------------------------------------------------

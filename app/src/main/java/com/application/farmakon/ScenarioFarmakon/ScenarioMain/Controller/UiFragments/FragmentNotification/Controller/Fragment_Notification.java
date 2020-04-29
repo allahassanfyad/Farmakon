@@ -1,5 +1,6 @@
 package com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,12 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.MainAct
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Model.Notification_Model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Pattrens.RcyNotificationAdapter;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Pattrens.IFOnBackPressed;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment_Notification extends Fragment {
+public class Fragment_Notification extends Fragment implements IFOnBackPressed {
 
     private View view;
     private List<Notification_Model> notificationList = new ArrayList<>();
@@ -66,5 +68,15 @@ public class Fragment_Notification extends Fragment {
     {
         super.onActivityCreated(savedInstanceState);
 
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getActivity().startActivity(a);
+        getActivity().finish();
+        return true;
     }
 }

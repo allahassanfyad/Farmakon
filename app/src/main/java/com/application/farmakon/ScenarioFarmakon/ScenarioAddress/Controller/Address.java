@@ -43,6 +43,7 @@ public class Address extends AppCompatActivity implements NetworkInterface {
     ModelGetAddressDatum[] addressData;
 
     private List<ModelGetAddressDatum> addressList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +68,8 @@ public class Address extends AppCompatActivity implements NetworkInterface {
 //        }
 
 
-
         loading.setVisibility(View.VISIBLE);
-        new Apicalls(Address.this,Address.this).get_user_address();
-
+        new Apicalls(Address.this, Address.this).get_user_address();
 
 
         btnaddnewplaces.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +77,7 @@ public class Address extends AppCompatActivity implements NetworkInterface {
             public void onClick(View v) {
 
                 Add_Address_Popup add_address_popup = new Add_Address_Popup();
-                add_address_popup.dialog(Address.this,R.layout.add_address_popup,.90);
+                add_address_popup.dialog(Address.this, R.layout.add_address_popup, .90);
 
             }
         });
@@ -88,7 +87,7 @@ public class Address extends AppCompatActivity implements NetworkInterface {
             @Override
             public void onClick(View v) {
                 Add_Address_Popup add_address_popup = new Add_Address_Popup();
-                add_address_popup.dialog(Address.this,R.layout.add_address_popup,.90);
+                add_address_popup.dialog(Address.this, R.layout.add_address_popup, .90);
 
             }
         });
@@ -98,8 +97,8 @@ public class Address extends AppCompatActivity implements NetworkInterface {
             @Override
             public void onClick(View v) {
 
-                Product_Details.opencart =1;
-                startActivity(new Intent(Address.this,MainActivity.class));
+                Product_Details.opencart = 1;
+                startActivity(new Intent(Address.this, MainActivity.class));
 
             }
         });
@@ -117,10 +116,10 @@ public class Address extends AppCompatActivity implements NetworkInterface {
 
         Gson gson = new Gson();
 
-        ModelGetAddressUser addressUser = gson.fromJson(String.valueOf(model.getJsonObject()),ModelGetAddressUser.class);
+        ModelGetAddressUser addressUser = gson.fromJson(String.valueOf(model.getJsonObject()), ModelGetAddressUser.class);
         addressData = addressUser.getData();
 
-        for (int i = 0; i<addressData.length; i ++){
+        for (int i = 0; i < addressData.length; i++) {
 
             ModelGetAddressDatum datum = new ModelGetAddressDatum();
 
@@ -137,22 +136,21 @@ public class Address extends AppCompatActivity implements NetworkInterface {
             addressList.add(datum);
         }
 
-        if (addressList.size() == 0 || addressList == null){
+        if (addressList.size() == 0 || addressList == null) {
 
             linearnoaddress.setVisibility(View.VISIBLE);
             linearaddress.setVisibility(View.GONE);
 
-        }else {
+        } else {
 
             linearnoaddress.setVisibility(View.GONE);
             linearaddress.setVisibility(View.VISIBLE);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            RcySavedPlacesAdapter adabter = new RcySavedPlacesAdapter(addressList,Address.this);
+            RcySavedPlacesAdapter adabter = new RcySavedPlacesAdapter(addressList, Address.this);
             recyclerView.setAdapter(adabter);
 
         }
-
 
 
     }
@@ -162,4 +160,20 @@ public class Address extends AppCompatActivity implements NetworkInterface {
         loading.setVisibility(View.GONE);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if (Fragment_Cart.address == 1) {
+
+            Product_Details.opencart = 1;
+            startActivity(new Intent(Address.this, MainActivity.class));
+
+
+        } else {
+
+            startActivity(new Intent(Address.this, MainActivity.class));
+
+        }
+    }
+
 }

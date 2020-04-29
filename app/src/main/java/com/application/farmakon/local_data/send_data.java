@@ -7,11 +7,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class send_data {
     // SET TOTAL ID
-    public static void CART_TAX_PERCETAGE(Context context, String taxpercentage)
+    public static void PHONE_NUMBER(Context context, String taxpercentage)
     {
-        SharedPreferences sharedPreferences=context.getSharedPreferences("taxpercentage",MODE_PRIVATE);
+        SharedPreferences sharedPreferences=context.getSharedPreferences("phone",MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("taxpercentage", taxpercentage);
+        editor.putString("phone", taxpercentage);
         editor.commit();
     }
 

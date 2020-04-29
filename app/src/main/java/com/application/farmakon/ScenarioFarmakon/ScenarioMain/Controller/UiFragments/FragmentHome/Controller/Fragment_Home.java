@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.MainActivity;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Pattrens.IFOnBackPressed;
 import com.application.farmakon.Utils.firebase_storage;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,7 +31,7 @@ import java.io.InputStream;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Fragment_Home extends Fragment {
+public class Fragment_Home extends Fragment implements IFOnBackPressed {
 
     private View view;
     Uri selectedImage;
@@ -108,5 +109,15 @@ public class Fragment_Home extends Fragment {
                 Toast.makeText(getContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getActivity().startActivity(a);
+        getActivity().finish();
+        return true;
     }
 }

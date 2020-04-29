@@ -86,6 +86,7 @@ public class Product_Details extends AppCompatActivity {
                 c.setTxttitle(txttitle.getText().toString());
                 c.setTxtprice(txtprice.getText().toString());
                 c.setTxtnumberchoose(txtnumber.getText().toString());
+                c.setProduct_id(tinyDB.getString("product_id"));
 
 
                 Realm_Cart_Product_adapter adapter = new Realm_Cart_Product_adapter(realm);

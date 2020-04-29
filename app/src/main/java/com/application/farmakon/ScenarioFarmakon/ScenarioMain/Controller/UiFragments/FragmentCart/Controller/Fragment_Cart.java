@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
+import com.application.farmakon.ScenarioFarmakon.ScenarioAddress.Controller.Address;
 import com.application.farmakon.ScenarioFarmakon.ScenarioCheckout.Controller.checkout;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.MainActivity;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCart.Model.Realm_Cart_Photo_Model;
@@ -26,12 +27,15 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCart.Pattrens.RcyCartProductAdapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCart.Pattrens.Realm_Cart_Photo_adapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCart.Pattrens.Realm_Cart_Product_adapter;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Pattrens.IFOnBackPressed;
+import com.application.farmakon.Utils.TinyDB;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import io.realm.Realm;
 
-public class Fragment_Cart extends Fragment {
+public class Fragment_Cart extends Fragment  implements IFOnBackPressed {
 
 
     private View view;
@@ -42,6 +46,8 @@ public class Fragment_Cart extends Fragment {
     private ArrayList<Realm_Cart_Photo_Model> cart_photo_models = new ArrayList<>();
     private ArrayList<Realm_Cart_Product_Model> cart_product_models = new ArrayList<>();
 
+
+    TinyDB tinyDB;
     TextView txtCartPhotoCount,txtCartItemCount,txtNoItem;
     EditText editNotes;
     Button btnProceed;
@@ -50,6 +56,7 @@ public class Fragment_Cart extends Fragment {
     int cart_item_product_count = 0;
     int cart_item_photo_count = 0;
     int cart_item_count_total = 0;
+    public static int address = 0;
 
 
     @Nullable
@@ -59,6 +66,8 @@ public class Fragment_Cart extends Fragment {
         view = inflater.inflate(R.layout.cart_fragment, container, false);
         Realm.init(getActivity());
         MainActivity.lineartoolbar.setVisibility(View.VISIBLE);
+        tinyDB = new TinyDB(getContext());
+
 
         adapter_product = new Realm_Cart_Product_adapter(realm);
         adapter_photo = new Realm_Cart_Photo_adapter(realm);
@@ -114,7 +123,7 @@ public class Fragment_Cart extends Fragment {
 
         cart_item_count_total = cart_item_photo_count + cart_item_product_count ;
 
-        Toast.makeText(getContext(), "cart count"+cart_item_count_total, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "cart count"+cart_item_count_total, Toast.LENGTH_SHORT).show();
 
         txtCartItemCount.setText(""+cart_item_count_total);
 
@@ -130,7 +139,16 @@ public class Fragment_Cart extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getContext(), checkout.class));
+
+                tinyDB.putString("Photo_Count", txtCartPhotoCount.getText().toString());
+                tinyDB.putString("item_Count", txtCartItemCount.getText().toString());
+                tinyDB.putString("Notes", editNotes.getText().toString());
+
+                address = 1;
+                startActivity(new Intent(getContext(), Address.class));
+                Objects.requireNonNull(getActivity()).finish();
+
+
 
             }
         });
@@ -147,4 +165,13 @@ public class Fragment_Cart extends Fragment {
     }
 
 
+    @Override
+    public boolean onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getActivity().startActivity(a);
+        getActivity().finish();
+        return true;
+    }
 }

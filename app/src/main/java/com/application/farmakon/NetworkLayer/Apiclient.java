@@ -32,7 +32,9 @@ public enum Apiclient
     FAQ("faq", null,11),
     SEN_ORDER("order-items", Arrays.asList("products","image_urls","notes","address_id"),12),
     GET_PERSONAL_INFO("my-personal-info", null,13),
-    GET_USER_ADDRESS("my-address", null,14);
+    GET_USER_ADDRESS("my-address", null,14),
+    GET_HOME("home", null,15);
+
 
 
 

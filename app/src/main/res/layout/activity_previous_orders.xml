@@ -9,35 +9,74 @@
     tools:context=".ScenarioFarmakon.ScenarioPrevouisOrders.Controller.Previous_Orders">
 
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:gravity="center_vertical"
-        android:paddingStart="0dp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:text="Previous Orders"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_16sdp"
-        android:textStyle="bold" />
-
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcyPreviousOrders"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        tools:listitem="@layout/previous_order_item">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:paddingStart="0dp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="Previous Orders"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcyPreviousOrders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                tools:listitem="@layout/previous_order_item">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparentLoading"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNoItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sorry There Is No Previous Orders To Show :("
+            android:gravity="center"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:textColor="@color/colorb"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 </LinearLayout>

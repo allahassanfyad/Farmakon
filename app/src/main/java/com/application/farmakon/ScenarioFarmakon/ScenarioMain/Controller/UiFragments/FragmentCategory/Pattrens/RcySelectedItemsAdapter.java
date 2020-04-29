@@ -7,25 +7,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
-import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.ModelCategory;
-import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Products;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.ModelSelectedItem;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
 import com.application.farmakon.Utils.TinyDB;
 import com.bumptech.glide.Glide;
+
 import java.util.List;
 
-public class RcyCategoryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class RcySelectedItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
     TinyDB tinyDB;
-    List<ModelCategory> mMainGridList;
+    List<ModelSelectedItem> mMainGridList;
     Context mContext;
 
 
-    public RcyCategoryGridAdapter(List<ModelCategory> songsList, Context context) {
+    public RcySelectedItemsAdapter(List<ModelSelectedItem> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -51,7 +54,7 @@ public class RcyCategoryGridAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final ModelCategory catrgory  = mMainGridList.get(position);
+        final ModelSelectedItem catrgory  = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
@@ -67,11 +70,14 @@ public class RcyCategoryGridAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             @Override
             public void onClick(View v) {
 
-                tinyDB = new TinyDB(mContext);
+                tinyDB.putString("product_description",catrgory.getDescription());
+                tinyDB.putString("product_image",catrgory.getImage());
+                tinyDB.putString("product_price",catrgory.getPrice());
+                tinyDB.putString("product_title",catrgory.getTitle());
+                tinyDB.putString("product_id", String.valueOf(catrgory.getId()));
 
-                tinyDB.putString("categoryID", String.valueOf(mMainGridList.get(position).getId()));
 
-                mContext.startActivity(new Intent(mContext, Products.class));
+                mContext.startActivity(new Intent(mContext, Product_Details.class));
 
             }
         });

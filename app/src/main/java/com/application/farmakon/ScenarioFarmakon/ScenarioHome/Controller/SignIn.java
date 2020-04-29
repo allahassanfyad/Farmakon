@@ -31,10 +31,11 @@ import com.google.gson.Gson;
 public class SignIn extends AppCompatActivity implements NetworkInterface {
 
     Button btnsignin;
-    EditText editphone,editcountrycode;
+    EditText editphone, editcountrycode;
     LinearLayout loading;
     String token;
     String phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,7 @@ public class SignIn extends AppCompatActivity implements NetworkInterface {
         btnsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editphone.getText().toString().equals("")){
+                if (editphone.getText().toString().equals("")) {
 
                     editphone.setError("Please Enter Your Phone Number");
 
@@ -69,17 +70,16 @@ public class SignIn extends AppCompatActivity implements NetworkInterface {
                             .playOn(findViewById(R.id.editPhoneNumber));
 
 
-                }else {
+                } else {
 
-                    phone = editcountrycode.getText().toString()+editphone.getText().toString();
+                    phone = editcountrycode.getText().toString() + editphone.getText().toString();
 
-                    Log.e("phone",""+phone);
+                    Log.e("phone", "" + phone);
 
                     loading.setVisibility(View.VISIBLE);
-                    new Apicalls(SignIn.this,SignIn.this).loginUser(phone,"1",token,"123456789");
+                    new Apicalls(SignIn.this, SignIn.this).loginUser(phone, "1", token, "123456789");
 
                 }
-
 
 
             }
@@ -105,6 +105,8 @@ public class SignIn extends AppCompatActivity implements NetworkInterface {
         send_data.userId_check(this, true);
         send_data.user_id(SignIn.this, String.valueOf(userInfo.getId()));
 
+        send_data.PHONE_NUMBER(this, userInfo.getPhone());
+
 //        startActivity(new Intent(SignIn.this,Activation_Code.class));
 //        finish();
 
@@ -118,7 +120,17 @@ public class SignIn extends AppCompatActivity implements NetworkInterface {
     public void OnError(VolleyError error) {
         loading.setVisibility(View.GONE);
 
-        Log.e("error_login",error.toString());
+        Log.e("error_login", error.toString());
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+        finish();
 
     }
 }

@@ -1,5 +1,6 @@
-package com.application.farmakon.ScenarioFarmakon.ScenarioAddress.Controller;
+package com.application.farmakon.ScenarioFarmakon.ScenarioCheckout.Controller;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,14 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioAddAddress.Controller.Add_Address;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.MainActivity;
 import com.application.farmakon.Utils.TinyDB;
 
-public class Add_Address_Popup {
+public class CheckOut_Popup {
 
     Context context;
     TinyDB tinyDB;
     public static Dialog dialog ;
-    Button btnlocate,btnsetmanually;
+    Button btnok;
 
 
     public void dialog(final Context context, int resource, double widthh) {
@@ -30,30 +32,31 @@ public class Add_Address_Popup {
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(resource);
+        dialog.setCanceledOnTouchOutside(false);
         tinyDB = new TinyDB(context);
-
-        btnlocate = dialog.findViewById(R.id.btnLocate);
-        btnsetmanually = dialog.findViewById(R.id.btnSetManually);
 
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         int width = (int) (context.getResources().getDisplayMetrics().widthPixels * widthh);
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
+
         dialog.getWindow().setLayout(width, height);
         WindowManager.LayoutParams wlp = dialog.getWindow().getAttributes();
         wlp.gravity = Gravity.CENTER;
         dialog.getWindow().setAttributes(wlp);
 
+        btnok = dialog.findViewById(R.id.btnCheckoutOk);
 
-        btnsetmanually.setOnClickListener(new View.OnClickListener() {
+        btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                context.startActivity(new Intent(context, Add_Address.class));
+                context.startActivity(new Intent(context, MainActivity.class));
+                dialog.dismiss();
                 ((AppCompatActivity)context).finish();
+
 
             }
         });
-
 
 
         dialog.show();

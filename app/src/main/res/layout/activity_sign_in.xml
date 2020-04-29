@@ -25,7 +25,6 @@
                 android:layout_weight=".23"
                 android:background="@drawable/background_header" />
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -33,183 +32,192 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <ImageView
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_weight=".3"
-                    android:scaleX=".9"
-                    android:scaleY=".9"
-                    android:src="@drawable/splash_logo" />
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_weight=".07"
-                    android:gravity="center_vertical"
-                    android:text="Enter your phone number"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_weight=".08"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:paddingEnd="@dimen/_5sdp"
-                    android:text="PHONE NUMBER"
-                    android:textColor="@color/colorb"
-                    android:textSize="@dimen/_15sdp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_weight=".1"
-                    android:orientation="horizontal"
-                    android:weightSum="1"
-
-                    >
-
-                    <EditText
-                        android:id="@+id/editCountryCode"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:layout_marginEnd="@dimen/_3sdp"
-                        android:layout_weight=".15"
-                        android:backgroundTint="@color/colorLightYellow"
-                        android:editable="false"
-                        android:gravity="center"
-                        android:text="+20"
-                        android:textColor="@color/colorb"
-                        android:textSize="@dimen/_14sdp" />
-
-                    <EditText
-                        android:id="@+id/editPhoneNumber"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight=".85"
-                        android:backgroundTint="@color/colorLightYellow"
-                        android:gravity="start|center_vertical"
-                        android:hint="01004646198"
-                        android:inputType="phone"
-                        android:paddingStart="@dimen/_5sdp"
-                        android:paddingEnd="@dimen/_5sdp"
-                        android:textColor="@color/colorb"
-                        android:textSize="@dimen/_14sdp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_weight=".07"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <CheckBox
-                        android:id="@+id/remember_me"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="match_parent"
-                        android:buttonTint="@color/colorAccent"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:scaleX="1.2"
-                        android:scaleY="1.2"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/_11sdp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="Make sure the phone "
-                        android:textColor="@color/colorb"
-                        android:textSize="@dimen/_11sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="number is correct"
-                        android:textColor="@color/colorLightBlue"
-                        android:textSize="@dimen/_11sdp" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_13sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_weight=".2"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/btnSignIn"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_marginBottom="@dimen/_7sdp"
-                        android:background="@drawable/raduis_all_gradiant"
-                        android:text="Processed with phone number"
-                        android:textColor="@color/colorw"
-                        android:textSize="@dimen/_13sdp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight=".77"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:scaleX=".9"
+                            android:scaleY=".9"
+                            android:src="@drawable/splash_logo" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_weight=".18"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:text="Enter your phone number"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_14sdp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:text="PHONE NUMBER"
+                            android:textColor="@color/colorb"
+                            android:textSize="@dimen/_15sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+
+                            >
+
+                            <EditText
+                                android:id="@+id/editCountryCode"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_marginEnd="@dimen/_3sdp"
+                                android:layout_weight=".15"
+                                android:backgroundTint="@color/colorLightYellow"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:text="+20"
+                                android:textColor="@color/colorb"
+                                android:textSize="@dimen/_14sdp" />
+
+                            <EditText
+                                android:id="@+id/editPhoneNumber"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_weight=".85"
+                                android:backgroundTint="@color/colorLightYellow"
+                                android:gravity="start|center_vertical"
+                                android:hint="01004646198"
+                                android:inputType="phone"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:textColor="@color/colorb"
+                                android:textSize="@dimen/_14sdp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:text="By continuing you agree to "
-                        android:textColor="@color/colorb"
-                        android:textSize="@dimen/_8sdp" />
+                        </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:text="terms and conditions"
-                        android:textColor="@color/colorLightBlue"
-                        android:textSize="@dimen/_8sdp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <CheckBox
+                                android:id="@+id/remember_me"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="match_parent"
+                                android:buttonTint="@color/colorAccent"
+                                android:checked="true"
+                                android:gravity="center"
+                                android:scaleX="1.2"
+                                android:scaleY="1.2"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/_11sdp" />
 
 
-                </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="Make sure the phone "
+                                android:textColor="@color/colorb"
+                                android:textSize="@dimen/_11sdp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="number is correct"
+                                android:textColor="@color/colorLightBlue"
+                                android:textSize="@dimen/_11sdp" />
 
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_13sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="bottom"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/btnSignIn"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_7sdp"
+                                android:background="@drawable/raduis_all_gradiant"
+                                android:text="Processed with phone number"
+                                android:textColor="@color/colorw"
+                                android:textSize="@dimen/_13sdp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="By continuing you agree to "
+                                android:textColor="@color/colorb"
+                                android:textSize="@dimen/_8sdp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="terms and conditions"
+                                android:textColor="@color/colorLightBlue"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
             </LinearLayout>
         </LinearLayout>
 

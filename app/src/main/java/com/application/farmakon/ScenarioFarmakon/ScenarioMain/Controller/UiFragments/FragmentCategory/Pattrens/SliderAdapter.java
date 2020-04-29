@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.farmakon.R;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.ModelSlide;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.SliderItem;
 
 import com.bumptech.glide.Glide;
@@ -20,10 +21,10 @@ public class SliderAdapter extends
         SliderViewAdapter<SliderAdapter.SliderAdapterVH> {
 
     private Context context;
-    private List<SliderItem> mSliderItems;
+    private List<ModelSlide> mSliderItems;
 
 
-    public SliderAdapter(Context context, List<SliderItem> mSliderItems) {
+    public SliderAdapter(Context context, List<ModelSlide> mSliderItems) {
         this.context = context;
         this.mSliderItems = mSliderItems;
     }
@@ -37,11 +38,12 @@ public class SliderAdapter extends
     @Override
     public void onBindViewHolder(SliderAdapterVH viewHolder, final int position) {
 
-        SliderItem sliderItem = mSliderItems.get(position);
+        ModelSlide sliderItem = mSliderItems.get(position);
 
 
-        Glide.with(viewHolder.itemView)
+        Glide.with(context)
                 .load(sliderItem.getImageUrl())
+                .placeholder(R.drawable.img)
                 .fitCenter()
                 .into(viewHolder.imageViewBackground);
 

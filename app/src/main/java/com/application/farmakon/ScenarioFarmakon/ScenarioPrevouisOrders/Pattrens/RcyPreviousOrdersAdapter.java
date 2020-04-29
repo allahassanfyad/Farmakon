@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioAddress.Model.Address_Model;
+import com.application.farmakon.ScenarioFarmakon.ScenarioPrevouisOrders.Model.ModelMyOrder;
 import com.application.farmakon.ScenarioFarmakon.ScenarioPrevouisOrders.Model.Previous_Order_Model;
 import com.application.farmakon.Utils.TinyDB;
 
@@ -20,11 +21,11 @@ public class RcyPreviousOrdersAdapter extends RecyclerView.Adapter<RecyclerView.
 {
 
     TinyDB tinyDB;
-    List<Previous_Order_Model> mMainGridList;
+    List<ModelMyOrder> mMainGridList;
     Context mContext;
 
 
-    public RcyPreviousOrdersAdapter(List<Previous_Order_Model> songsList, Context context) {
+    public RcyPreviousOrdersAdapter(List<ModelMyOrder> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -50,12 +51,12 @@ public class RcyPreviousOrdersAdapter extends RecyclerView.Adapter<RecyclerView.
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final Previous_Order_Model previous_order_model = mMainGridList.get(position);
+        final ModelMyOrder previous_order_model = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
 
-        mainHolder.textprice.setText(previous_order_model.getPrice());
+        mainHolder.textprice.setText(previous_order_model.getTotal());
         mainHolder.textdate.setText(previous_order_model.getDate());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -8,16 +9,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.application.farmakon.NetworkLayer.Apicalls;
+import com.application.farmakon.NetworkLayer.NetworkInterface;
+import com.application.farmakon.NetworkLayer.ResponseModel;
 import com.application.farmakon.R;
+import com.application.farmakon.ScenarioFarmakon.ScenarioHome.Controller.SignIn;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Model.ModelLogout;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Pattrens.IFOnBackPressed;
 import com.application.farmakon.ScenarioFarmakon.ScenarioPersonalInfo.Controller.Personal_Info;
 import com.application.farmakon.ScenarioFarmakon.ScenarioPrevouisOrders.Controller.Previous_Orders;
 import com.application.farmakon.ScenarioFarmakon.ScenarioAboutUs.Controller.About_Us;
@@ -29,14 +40,19 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Controller.Fragment_Notification;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
 import com.application.farmakon.ScenarioFarmakon.ScenarioVouchers.Controller.Vouchers;
+import com.application.farmakon.Utils.TinyDB;
+import com.application.farmakon.local_data.send_data;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-public class MainActivity extends AppCompatActivity {
+import es.dmoral.toasty.Toasty;
+
+public class MainActivity extends AppCompatActivity implements NetworkInterface {
 
     public static BottomNavigationView navigation;
     FragmentManager fragmentManager;
@@ -46,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     TextView txtdissmiss;
     FirebaseStorage storage;
     StorageReference storageReference;
+    LinearLayout loading;
+    TinyDB tinyDB;
+
 
 
     @Override
@@ -85,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer);
         lineartoolbar = findViewById(R.id.linearToolbar);
         txtdissmiss = findViewById(R.id.txtDismiss);
+        loading = findViewById(R.id.loading);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -206,38 +226,33 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.openDrawer(Gravity.START);
                 }
 
-//                AlertDialog.Builder alertDialogBulder = new AlertDialog.Builder(MainActivity.this);
-//
-//                alertDialogBulder.setTitle("تسجيل الخروج");
-//
-//                alertDialogBulder
-//                        .setMessage("هل تريد تسجيل الخروج من تمرات ")
-//                        .setCancelable(false)
-//                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                loading.setVisibility(View.VISIBLE);
-//                                logout = 1;
-//                                new Apicalls(MainActivity.this, MainActivity.this).Logout();
-//                                disconnectFromFacebook();
-//                                signOut();
-//
-////                                Register.logedin = 0;
-////                                SignIn.logedin = 0;
-//
-//                            }
-//                        }).setNegativeButton("لا", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//                //create it
-//                AlertDialog alertDialog = alertDialogBulder.create();
-//                // show it
-//                alertDialog.show();
+                AlertDialog.Builder alertDialogBulder = new AlertDialog.Builder(MainActivity.this);
+
+                alertDialogBulder.setTitle("Logout");
+
+                alertDialogBulder
+                        .setMessage("Are you Sure You Want To Logout")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                loading.setVisibility(View.VISIBLE);
+                                new Apicalls(MainActivity.this, MainActivity.this).Logout();
+
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+                    }
+                });
+
+                //create it
+                AlertDialog alertDialog = alertDialogBulder.create();
+                // show it
+                alertDialog.show();
 
             }
         });
@@ -384,4 +399,38 @@ public class MainActivity extends AppCompatActivity {
         fragment.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (!(fragment instanceof IFOnBackPressed) || !((IFOnBackPressed) fragment).onBackPressed()) {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void OnStart() {
+
+    }
+
+    @Override
+    public void OnResponse(ResponseModel model) {
+        loading.setVisibility(View.GONE);
+
+        tinyDB = new TinyDB(MainActivity.this);
+        Gson gson2 = new Gson();
+        ModelLogout logouta = gson2.fromJson(model.getJsonObject().toString(), ModelLogout.class);
+        send_data.userId_check(MainActivity.this, false);
+        send_data.token(MainActivity.this, "0");
+        send_data.user_id(this, "0");
+        startActivity(new Intent(MainActivity.this, SignIn.class));
+        finish();
+
+    }
+
+    @Override
+    public void OnError(VolleyError error) {
+        loading.setVisibility(View.GONE);
+
+        Log.e("Logout_Error", error.toString());
+
+    }
 }

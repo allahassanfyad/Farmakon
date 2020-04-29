@@ -6,11 +6,11 @@ import android.content.SharedPreferences;
 import static android.content.Context.MODE_PRIVATE;
 
 public class saved_data {
-    public static String get_Tax_Percentage(Context context)
+    public static String get_phone_number(Context context)
     {
-        SharedPreferences sharedPreferences=context.getSharedPreferences("taxpercentage",MODE_PRIVATE);
-        String taxpercentage=sharedPreferences.getString("taxpercentage","0");
-        return taxpercentage;
+        SharedPreferences sharedPreferences=context.getSharedPreferences("phone",MODE_PRIVATE);
+        String phone=sharedPreferences.getString("phone","0");
+        return phone;
     }
 
     public static String get_Discount_Percentage(Context context)
