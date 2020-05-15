@@ -63,7 +63,7 @@
             android:drawableStart="@drawable/ic_search_black"
             android:drawablePadding="@dimen/_3sdp"
             android:hint="Search"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:paddingStart="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"

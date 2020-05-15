@@ -35,17 +35,53 @@
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcyPreviousOrders"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                tools:listitem="@layout/previous_order_item">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent">
 
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/loading_Shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+
+                        <include layout="@layout/placeholder_shimmer" />
+
+                        <include layout="@layout/placeholder_shimmer" />
+
+                        <include layout="@layout/placeholder_shimmer" />
+
+                        <include layout="@layout/placeholder_shimmer" />
+
+                        <include layout="@layout/placeholder_shimmer" />
+
+                        <include layout="@layout/placeholder_shimmer" />
+
+
+                    </LinearLayout>
+
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyPreviousOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    tools:listitem="@layout/previous_order_item"
+                    android:visibility="gone">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -71,12 +107,12 @@
             android:id="@+id/txtNoItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Sorry There Is No Previous Orders To Show :("
             android:gravity="center"
+            android:text="Sorry There Is No Previous Orders To Show :("
+            android:textColor="@color/colorb"
             android:textSize="@dimen/_20sdp"
             android:textStyle="bold"
-            android:textColor="@color/colorb"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 </LinearLayout>

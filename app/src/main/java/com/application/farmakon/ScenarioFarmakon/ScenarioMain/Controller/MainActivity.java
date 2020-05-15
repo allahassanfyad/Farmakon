@@ -14,8 +14,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,9 +42,12 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentHome.Controller.Fragment_Home;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Controller.Fragment_Notification;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Products;
 import com.application.farmakon.ScenarioFarmakon.ScenarioVouchers.Controller.Vouchers;
 import com.application.farmakon.Utils.TinyDB;
 import com.application.farmakon.local_data.send_data;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
     StorageReference storageReference;
     LinearLayout loading;
     TinyDB tinyDB;
-
+    EditText edittoolsearch;
 
 
     @Override
@@ -73,15 +79,15 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
-
+        lineartoolbar = findViewById(R.id.linearToolbar);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-
+        edittoolsearch = findViewById(R.id.editToolSearch);
         navigation = findViewById(R.id.navigation);
         fragmentManager = getSupportFragmentManager();
 
 
-        if (Product_Details.opencart == 1){
+        if (Product_Details.opencart == 1) {
 
             Fragment_Cart cart = new Fragment_Cart();
             loadFragment(cart);
@@ -90,8 +96,9 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
             Product_Details.opencart = 0;
 
 
-        }else {
+        } else {
 
+            lineartoolbar.setVisibility(View.GONE);
             FragmentTransaction fr = MainActivity.this.getSupportFragmentManager().beginTransaction();
             fr.replace(R.id.fragment_container, new Fragment_Home(), "Home_Fragment");
             fr.addToBackStack(null);
@@ -102,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
 
 
         drawerLayout = findViewById(R.id.drawer);
-        lineartoolbar = findViewById(R.id.linearToolbar);
+
         txtdissmiss = findViewById(R.id.txtDismiss);
         loading = findViewById(R.id.loading);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -187,8 +194,35 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
                 }
             }
         });
-    }
 
+        edittoolsearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+
+                    if (edittoolsearch.getText().toString().equals("")) {
+
+                        edittoolsearch.setError("Please Enter Your Search Word");
+                        YoYo.with(Techniques.Shake)
+                                .duration(700)
+                                .repeat(1)
+                                .playOn(findViewById(R.id.editToolSearch));
+
+                    } else {
+
+                        tinyDB = new TinyDB(MainActivity.this);
+                        tinyDB.putString("search_word",edittoolsearch.getText().toString());
+                        Fragment_Category.x = 2;
+                        startActivity(new Intent(MainActivity.this, Products.class));
+
+                    }
+                }
+                return false;
+            }
+        });
+
+
+    }
 
 
     void onClick_navigation() {
@@ -290,7 +324,6 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
                 }
 
 
-
                 startActivity(new Intent(MainActivity.this, Personal_Info.class));
 //                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 //                sharingIntent.setType("text/plain");
@@ -353,7 +386,6 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
         });
 
 
-
         //GO TO VOUCHERS
         LinearLayout linearvouchers = findViewById(R.id.linearVouchers);
         linearvouchers.setOnClickListener(new View.OnClickListener() {
@@ -399,7 +431,8 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
         fragment.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override public void onBackPressed() {
+    @Override
+    public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (!(fragment instanceof IFOnBackPressed) || !((IFOnBackPressed) fragment).onBackPressed()) {
             super.onBackPressed();
@@ -415,6 +448,7 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
     public void OnResponse(ResponseModel model) {
         loading.setVisibility(View.GONE);
 
+
         tinyDB = new TinyDB(MainActivity.this);
         Gson gson2 = new Gson();
         ModelLogout logouta = gson2.fromJson(model.getJsonObject().toString(), ModelLogout.class);
@@ -423,6 +457,7 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
         send_data.user_id(this, "0");
         startActivity(new Intent(MainActivity.this, SignIn.class));
         finish();
+
 
     }
 

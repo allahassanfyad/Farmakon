@@ -301,4 +301,43 @@ public class Apicalls
     }
 
     //----------------------------------------------------------------------------------------------
+
+
+    public void get_notification ()
+    {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.GET_NOTIFICATION.getURL(),Request.Method.GET,Apiclient.GET_NOTIFICATION.getParams(),null, null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    public void get_all_products ()
+    {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.GET_PRODUCTS.getURL(),Request.Method.GET,Apiclient.GET_PRODUCTS.getParams(),null, null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    public void search_product (final String key)
+    {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.SEARCH_PRODUCT.getURL(),Request.Method.POST,Apiclient.SEARCH_PRODUCT.getParams(),Collections.singletonList(key), null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
 }

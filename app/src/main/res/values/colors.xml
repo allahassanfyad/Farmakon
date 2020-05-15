@@ -20,6 +20,7 @@
     <color name="colorDivider">#66c0d3</color>
     <color name="colorStrok">#00B9CB</color>
     <color name="colorNotification">#f1f1f1</color>
+    <color name="colorPlaceHolderBg">#dddcdd</color>
 
 
 

@@ -145,10 +145,10 @@ public class checkout extends AppCompatActivity {
             int toatalprice = 0;
             for (int x = 0; x < adapter_product.retrieve().size(); x++) {
 
-                int price = Integer.parseInt(cart_product_list.get(x).getTxtprice());
+                double price = Double.parseDouble(cart_product_list.get(x).getTxtprice());
                 int number = Integer.parseInt(cart_product_list.get(x).getTxtnumberchoose());
 
-                int totalpricebefortax = price * number;
+                int totalpricebefortax = (int) (price * number);
 
                 toatalprice += totalpricebefortax;
 
@@ -213,6 +213,8 @@ public class checkout extends AppCompatActivity {
             jsonBody.put("image_urls", image_urls);
             jsonBody.put("notes", notes);
             jsonBody.put("address_id", address_id);
+
+            Log.e("json-body",jsonBody.toString());
 
 
             JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {

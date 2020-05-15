@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Model.ModelNotificationDatum;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Model.Notification_Model;
 import com.application.farmakon.Utils.TinyDB;
 import com.bumptech.glide.Glide;
@@ -22,11 +23,11 @@ public class RcyNotificationAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 {
 
     TinyDB tinyDB;
-    List<Notification_Model> mMainGridList;
+    List<ModelNotificationDatum> mMainGridList;
     Context mContext;
 
 
-    public RcyNotificationAdapter(List<Notification_Model> songsList, Context context) {
+    public RcyNotificationAdapter(List<ModelNotificationDatum> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -52,18 +53,15 @@ public class RcyNotificationAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final Notification_Model notification = mMainGridList.get(position);
+        final ModelNotificationDatum notification = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
 
 
         mainHolder.texttitle.setText(notification.getTitle());
-        mainHolder.textdesc.setText(notification.getDescription());
-        Glide.with(mContext)
-                .load(notification.getImage())
-                .placeholder(R.drawable.img)
-                .into(mainHolder.imageView);
+        mainHolder.textdesc.setText(notification.getBody());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

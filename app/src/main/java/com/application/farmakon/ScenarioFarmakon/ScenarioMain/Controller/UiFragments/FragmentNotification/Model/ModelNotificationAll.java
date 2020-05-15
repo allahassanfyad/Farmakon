@@ -1,24 +1,24 @@
-package com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model;//
-//  ModelCategoryProduct.java
+package com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Model;//
+//  ModelNotificationAll.java
 //  Model Generated using http://www.jsoncafe.com/ 
-//  Created on May 14, 2020
+//  Created on April 30, 2020
 
 import org.json.*;
 import java.util.*;
 import com.google.gson.annotations.SerializedName;
 
 
-public class ModelCategoryProduct{
+public class ModelNotificationAll{
 
 	@SerializedName("data")
-	private ModelCategoryDatum[] data;
+	private ModelNotificationDatum[] data;
 	@SerializedName("status")
 	private int status;
 
-	public void setData(ModelCategoryDatum[] data){
+	public void setData(ModelNotificationDatum[] data){
 		this.data = data;
 	}
-	public ModelCategoryDatum[] getData(){
+	public ModelNotificationDatum[] getData(){
 		return this.data;
 	}
 	public void setStatus(int status){
@@ -28,25 +28,22 @@ public class ModelCategoryProduct{
 		return this.status;
 	}
 
-	public ModelCategoryProduct() {
-	}
-
 	/**
 	 * Instantiate the instance using the passed jsonObject to set the properties values
 	 */
-	public ModelCategoryProduct(JSONObject jsonObject){
+	public ModelNotificationAll(JSONObject jsonObject){
 		if(jsonObject == null){
 			return;
 		}
 		status = jsonObject.optInt("status");
 		JSONArray dataJsonArray = jsonObject.optJSONArray("data");
 		if(dataJsonArray != null){
-			ArrayList<ModelCategoryDatum> dataArrayList = new ArrayList<>();
+			ArrayList<ModelNotificationDatum> dataArrayList = new ArrayList<>();
 			for (int i = 0; i < dataJsonArray.length(); i++) {
 				JSONObject dataObject = dataJsonArray.optJSONObject(i);
-				dataArrayList.add(new ModelCategoryDatum(dataObject));
+				dataArrayList.add(new ModelNotificationDatum(dataObject));
 			}
-			data = (ModelCategoryDatum[]) dataArrayList.toArray();
+			data = (ModelNotificationDatum[]) dataArrayList.toArray();
 		}
 	}
 
@@ -60,7 +57,7 @@ public class ModelCategoryProduct{
 			jsonObject.put("status", status);
 			if(data != null && data.length > 0){
 				JSONArray dataJsonArray = new JSONArray();
-				for(ModelCategoryDatum dataElement : data){
+				for(ModelNotificationDatum dataElement : data){
 					dataJsonArray.put(dataElement.toJsonObject());
 				}
 				jsonObject.put("data", dataJsonArray);

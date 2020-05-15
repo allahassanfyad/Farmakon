@@ -70,7 +70,7 @@ public class firebase_storage {
 
                                     progressDialog.dismiss();
 
-                                    Toast.makeText(context, done, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(context, done, Toast.LENGTH_SHORT).show();
 
                                     imageURL = uri.toString();
 

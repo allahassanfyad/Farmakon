@@ -75,6 +75,7 @@ public class SignIn extends AppCompatActivity implements NetworkInterface {
                     phone = editcountrycode.getText().toString() + editphone.getText().toString();
 
                     Log.e("phone", "" + phone);
+                    Log.e("token",token);
 
                     loading.setVisibility(View.VISIBLE);
                     new Apicalls(SignIn.this, SignIn.this).loginUser(phone, "1", token, "123456789");

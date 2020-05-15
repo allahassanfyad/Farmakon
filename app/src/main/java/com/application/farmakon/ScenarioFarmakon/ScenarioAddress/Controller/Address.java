@@ -28,6 +28,7 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Pattrens.RcyNotificationAdapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -39,8 +40,9 @@ public class Address extends AppCompatActivity implements NetworkInterface {
     ImageView imggotocart;
     LinearLayout linearnoaddress, linearaddress;
     RecyclerView recyclerView;
-    LinearLayout loading;
+
     ModelGetAddressDatum[] addressData;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     private List<ModelGetAddressDatum> addressList = new ArrayList<>();
 
@@ -49,13 +51,14 @@ public class Address extends AppCompatActivity implements NetworkInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
 
-        loading = findViewById(R.id.loading);
+
         btnaddaddress = findViewById(R.id.btnAddAddress);
         btnaddnewplaces = findViewById(R.id.btnAdddNewPlaces);
         imggotocart = findViewById(R.id.imgGoToCart);
         linearaddress = findViewById(R.id.linearAddress);
         linearnoaddress = findViewById(R.id.linearNoAddress);
         recyclerView = findViewById(R.id.rcyAddress);
+        shimmerFrameLayout = findViewById(R.id.loading_Shimmer);
 
         linearnoaddress.setVisibility(View.GONE);
         linearaddress.setVisibility(View.GONE);
@@ -68,7 +71,7 @@ public class Address extends AppCompatActivity implements NetworkInterface {
 //        }
 
 
-        loading.setVisibility(View.VISIBLE);
+
         new Apicalls(Address.this, Address.this).get_user_address();
 
 
@@ -106,13 +109,29 @@ public class Address extends AppCompatActivity implements NetworkInterface {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shimmerFrameLayout.stopShimmer();
+
+    }
+
+    @Override
     public void OnStart() {
 
     }
 
     @Override
     public void OnResponse(ResponseModel model) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
 
         Gson gson = new Gson();
 
@@ -157,7 +176,9 @@ public class Address extends AppCompatActivity implements NetworkInterface {
 
     @Override
     public void OnError(VolleyError error) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
 
     }
 

@@ -71,6 +71,7 @@ public class Product_Details extends AppCompatActivity {
 
                 startActivity(new Intent(Product_Details.this, MainActivity.class));
                 opencart = 1;
+                finish();
 
 
             }

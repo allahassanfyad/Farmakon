@@ -14,22 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
-import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryDatum;
-import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.Products_model;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllSelectedItem;
 import com.application.farmakon.Utils.TinyDB;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class RcyProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class RcyProductsSelectedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
     TinyDB tinyDB;
-    List<ModelCategoryDatum> mMainGridList;
+    List<ModelAllSelectedItem> mMainGridList;
     Context mContext;
 
 
-    public RcyProductsAdapter(List<ModelCategoryDatum> songsList, Context context) {
+    public RcyProductsSelectedAdapter(List<ModelAllSelectedItem> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -55,7 +54,7 @@ public class RcyProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final ModelCategoryDatum catrgory  = mMainGridList.get(position);
+        final ModelAllSelectedItem catrgory  = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
@@ -63,9 +62,6 @@ public class RcyProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         mainHolder.texttitle.setText(catrgory.getTitle());
         mainHolder.textdescription.setText(catrgory.getDescription());
         mainHolder.textprice.setText(catrgory.getPrice());
-
-
-
         if ( catrgory.getPriceAfterDiscount() == null||catrgory.getPriceAfterDiscount().equals("0")){
 
             mainHolder.lineapricediscount.setVisibility(View.GONE);

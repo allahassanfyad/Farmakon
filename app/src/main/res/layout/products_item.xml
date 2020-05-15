@@ -63,7 +63,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_weight=".25"
+                android:layout_weight=".35"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -73,10 +73,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".6"
-                    android:gravity="center_vertical"
                     android:text="Fresh Skin"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
 
@@ -149,7 +148,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:layout_weight=".35"
+                android:layout_weight=".2"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -159,7 +158,8 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
-                    android:maxLines="2"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="Description "
                     android:textColor="@color/colorDarkerGray"
                     android:textSize="@dimen/_11sdp" />

@@ -1,5 +1,5 @@
 package com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model;//
-//  ModelCategoryDatum.java
+//  ModelAllSelectedItem.java
 //  Model Generated using http://www.jsoncafe.com/ 
 //  Created on May 14, 2020
 
@@ -8,7 +8,7 @@ import java.util.*;
 import com.google.gson.annotations.SerializedName;
 
 
-public class ModelCategoryDatum{
+public class ModelAllSelectedItem{
 
 	@SerializedName("description")
 	private String description;
@@ -69,13 +69,13 @@ public class ModelCategoryDatum{
 	}
 
 
-	public ModelCategoryDatum() {
+	public ModelAllSelectedItem() {
 	}
 
 	/**
 	 * Instantiate the instance using the passed jsonObject to set the properties values
 	 */
-	public ModelCategoryDatum(JSONObject jsonObject){
+	public ModelAllSelectedItem(JSONObject jsonObject){
 		if(jsonObject == null){
 			return;
 		}

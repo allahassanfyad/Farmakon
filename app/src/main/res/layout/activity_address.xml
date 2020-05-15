@@ -187,15 +187,52 @@
                             </LinearLayout>
 
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rcyAddress"
+                            <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_7sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginEnd="@dimen/_7sdp"
-                                android:layout_marginBottom="@dimen/_20sdp"
-                                tools:listitem="@layout/addres_item" />
+                                android:layout_height="match_parent">
+
+                                <com.facebook.shimmer.ShimmerFrameLayout
+                                    android:id="@+id/loading_Shimmer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+
+                                        <include layout="@layout/placeholder_shimmer" />
+
+                                        <include layout="@layout/placeholder_shimmer" />
+
+                                        <include layout="@layout/placeholder_shimmer" />
+
+                                        <include layout="@layout/placeholder_shimmer" />
+
+                                        <include layout="@layout/placeholder_shimmer" />
+
+                                        <include layout="@layout/placeholder_shimmer" />
+
+
+                                    </LinearLayout>
+
+
+                                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rcyAddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:layout_marginBottom="@dimen/_20sdp"
+                                    tools:listitem="@layout/addres_item"
+                                    android:visibility="gone"/>
+                            </RelativeLayout>
 
 
                             <Button

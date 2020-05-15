@@ -19,6 +19,7 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Model.ModelFAQDatum
 import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Model.ModelFAQQuestion;
 import com.application.farmakon.ScenarioFarmakon.ScenarioFAQ.Pattrens.FAQ_Group1_Adapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryDatum;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class FAQ extends AppCompatActivity implements NetworkInterface {
     List<ModelFAQDatum> faqGroup1ModelList = new ArrayList<>();
     LinearLayout loading;
     ModelFAQDatum[] faqdata;
-
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class FAQ extends AppCompatActivity implements NetworkInterface {
         setContentView(R.layout.activity_faq);
 
         loading = findViewById(R.id.loading);
+        recyclerView = findViewById(R.id.rcyFaqGroup);
 
 //        String question[] ={"What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications", "What 3rd-party-applications"};
 //        String answer[] ={"Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev", "Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev","Tiger Connect integrates with a range of cccv systems across a broad spectrum of vev"};
@@ -51,12 +53,28 @@ public class FAQ extends AppCompatActivity implements NetworkInterface {
 //
 //        }
 
-        loading.setVisibility(View.VISIBLE);
+        shimmerFrameLayout = findViewById(R.id.loading_Shimmer);
+
+
         new Apicalls(FAQ.this,FAQ.this).faq();
 
 
 
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shimmerFrameLayout.stopShimmer();
 
     }
 
@@ -67,7 +85,9 @@ public class FAQ extends AppCompatActivity implements NetworkInterface {
 
     @Override
     public void OnResponse(ResponseModel model) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
 
         Gson gson = new Gson();
         ModelFAQQuestion faqQuestion = gson.fromJson(String.valueOf(model.getJsonObject()),ModelFAQQuestion.class);
@@ -86,7 +106,6 @@ public class FAQ extends AppCompatActivity implements NetworkInterface {
         }
 
         //Group1
-        recyclerView = findViewById(R.id.rcyFaqGroup);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new FAQ_Group1_Adapter(recyclerView,faqGroup1ModelList));
 
@@ -94,7 +113,9 @@ public class FAQ extends AppCompatActivity implements NetworkInterface {
 
     @Override
     public void OnError(VolleyError error) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         Log.e("FAQ_error",""+error.toString());
 
     }

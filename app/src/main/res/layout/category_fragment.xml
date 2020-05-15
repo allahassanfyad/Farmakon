@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorw">
+    android:background="@color/colorw"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,18 +68,49 @@
 
                         </RelativeLayout>
 
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcyCategory"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_5sdp"
-                            android:orientation="horizontal"
-                            android:background="@color/colorw"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/category_item" />
+                            android:layout_height="wrap_content">
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/loading_Shimmer1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal">
 
 
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+
+                                </LinearLayout>
+
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcyCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:background="@color/colorw"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/category_item" />
+
+                        </RelativeLayout>
                     </LinearLayout>
 
 
@@ -159,18 +190,48 @@
 
                         </RelativeLayout>
 
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcySelection"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_5sdp"
-                            android:orientation="horizontal"
-                            android:background="@color/colorw"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/category_item" />
+                            android:layout_height="wrap_content">
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/loading_Shimmer2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal">
 
 
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+                                    <include layout="@layout/grid_placeholder_shimmer" />
+
+
+                                </LinearLayout>
+
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcySelection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:background="@color/colorw"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/category_item" />
+
+                        </RelativeLayout>
                     </LinearLayout>
 
 
@@ -179,24 +240,24 @@
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorTransparentLoading"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/loading"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/colorTransparentLoading"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical"-->
+<!--            android:visibility="gone">-->
 
-            <ProgressBar
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/colorPrimaryDark" />
-        </LinearLayout>
+<!--            <ProgressBar-->
+<!--                android:layout_width="@dimen/_50sdp"-->
+<!--                android:layout_height="@dimen/_50sdp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:indeterminateTint="@color/colorPrimaryDark" />-->
+<!--        </LinearLayout>-->
 
     </RelativeLayout>
 

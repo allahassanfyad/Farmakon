@@ -33,6 +33,9 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Pattrens.RcySelectedItemsAdapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Pattrens.SliderAdapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Pattrens.IFOnBackPressed;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Products;
+import com.application.farmakon.Utils.TinyDB;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -57,7 +60,12 @@ public class Fragment_Category extends Fragment implements NetworkInterface , IF
     ModelSlide slide[];
     private List<ModelCategory> categoryList = new ArrayList<>();
     private List<ModelSelectedItem> selectedItemList = new ArrayList<>();
-    List<ModelSlide> sliderItemList = new ArrayList<>();
+    private List<ModelSlide> sliderItemList = new ArrayList<>();
+    TinyDB tinyDB;
+    public static int x = 0;
+    private ShimmerFrameLayout shimmerFrameLayout1,shimmerFrameLayout2;
+
+
 
 
     @Nullable
@@ -65,13 +73,17 @@ public class Fragment_Category extends Fragment implements NetworkInterface , IF
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.category_fragment, container, false);
 
+        tinyDB = new TinyDB(getContext());
+
         MainActivity.lineartoolbar.setVisibility(View.VISIBLE);
         sliderView = view.findViewById(R.id.imageSlider);
         txtseeallcategory = view.findViewById(R.id.txtSeeAllCategory);
         txtseeallselection = view.findViewById(R.id.txtSeeAllSelection);
-        loading = view.findViewById(R.id.loading);
+//        loading = view.findViewById(R.id.loading);
         recyclerView1 = view.findViewById(R.id.rcyCategory);
         recyclerView2 = view.findViewById(R.id.rcySelection);
+        shimmerFrameLayout1 = view.findViewById(R.id.loading_Shimmer1);
+        shimmerFrameLayout2 = view.findViewById(R.id.loading_Shimmer2);
 
 
         txtseeallcategory.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +99,14 @@ public class Fragment_Category extends Fragment implements NetworkInterface , IF
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getContext(), All_Category.class));
+                x = 1;
+                startActivity(new Intent(getContext(), Products.class));
 
 
             }
         });
 
-        loading.setVisibility(View.VISIBLE);
+
         new Apicalls(getActivity(), Fragment_Category.this).get_home();
 
 
@@ -109,13 +122,33 @@ public class Fragment_Category extends Fragment implements NetworkInterface , IF
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout1.startShimmer();
+        shimmerFrameLayout2.startShimmer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shimmerFrameLayout1.stopShimmer();
+        shimmerFrameLayout2.stopShimmer();
+    }
+
+    @Override
     public void OnStart() {
 
     }
 
     @Override
     public void OnResponse(ResponseModel model) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout1.stopShimmer();
+        shimmerFrameLayout1.setVisibility(View.GONE);
+        recyclerView1.setVisibility(View.VISIBLE);
+
+        shimmerFrameLayout2.stopShimmer();
+        shimmerFrameLayout2.setVisibility(View.GONE);
+        recyclerView2.setVisibility(View.VISIBLE);
 
         if (model.getJsonObject().toString() != null) {
             Gson gson = new Gson();
@@ -199,7 +232,13 @@ public class Fragment_Category extends Fragment implements NetworkInterface , IF
 
     @Override
     public void OnError(VolleyError error) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout1.stopShimmer();
+        shimmerFrameLayout1.setVisibility(View.GONE);
+        recyclerView1.setVisibility(View.VISIBLE);
+
+        shimmerFrameLayout2.stopShimmer();
+        shimmerFrameLayout2.setVisibility(View.GONE);
+        recyclerView2.setVisibility(View.VISIBLE);
 
         Log.e("error_home_category", "" + error.getMessage().toString());
 

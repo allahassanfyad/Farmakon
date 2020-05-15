@@ -1,27 +1,27 @@
 package com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.application.farmakon.NetworkLayer.Apicalls;
 import com.application.farmakon.NetworkLayer.NetworkInterface;
 import com.application.farmakon.NetworkLayer.ResponseModel;
 import com.application.farmakon.R;
-import com.application.farmakon.ScenarioFarmakon.ScenarioAllCategory.Controller.All_Category;
-import com.application.farmakon.ScenarioFarmakon.ScenarioAllCategory.Pattrens.RcyAllCategoryAdapter;
-import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Controller.Fragment_Category;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllProduct;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllSelectedItem;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryDatum;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryProduct;
-import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.Products_model;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Pattrens.RcyProductsAdapter;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Pattrens.RcyProductsSelectedAdapter;
 import com.application.farmakon.Utils.TinyDB;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -32,8 +32,12 @@ public class Products extends AppCompatActivity implements NetworkInterface {
     private RecyclerView recyclerView;
     private List<ModelCategoryDatum> productsModelList = new ArrayList<>();
     ModelCategoryDatum[] productdata;
-    LinearLayout loading;
     TinyDB tinyDB;
+    TextView txtNoItem;
+    ModelAllSelectedItem[] selectedItems;
+    private List<ModelAllSelectedItem> selectedItemList = new ArrayList<>();
+    private ShimmerFrameLayout shimmerFrameLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +46,30 @@ public class Products extends AppCompatActivity implements NetworkInterface {
 
         tinyDB = new TinyDB(getApplicationContext());
 
-        loading = findViewById(R.id.loading);
 
+        txtNoItem = findViewById(R.id.txtNoItem);
         recyclerView = findViewById(R.id.rcyAllCategory);
+        shimmerFrameLayout = findViewById(R.id.loading_Shimmer);
 
-        loading.setVisibility(View.VISIBLE);
-        String category_id = tinyDB.getString("categoryID");
+        txtNoItem.setVisibility(View.GONE);
 
-        new Apicalls(Products.this,Products.this).category_product(category_id);
+        if (Fragment_Category.x == 2) {
+
+            String search_word = tinyDB.getString("search_word");
+            new Apicalls(Products.this, Products.this).search_product(search_word);
+
+        } else if (Fragment_Category.x == 1) {
+
+
+            new Apicalls(Products.this, Products.this).get_all_products();
+
+        } else {
+
+            String category_id = tinyDB.getString("categoryID");
+            new Apicalls(Products.this, Products.this).category_product(category_id);
+
+        }
+
 
 //        int[] imgCategory ={R.drawable.img1,R.drawable.img2, R.drawable.img1,
 //                R.drawable.img2,R.drawable.img1,R.drawable.img2,R.drawable.img1,R.drawable.img2,R.drawable.img1,
@@ -77,13 +97,27 @@ public class Products extends AppCompatActivity implements NetworkInterface {
 //        }
 
 
+//
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        RcyProductsAdapter adabter = new RcyProductsAdapter(productsModelList,this);
+//        recyclerView.setAdapter(adabter);
 
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        RcyProductsAdapter adabter = new RcyProductsAdapter(productsModelList,this);
-        recyclerView.setAdapter(adabter);
+    }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shimmerFrameLayout.stopShimmer();
 
     }
 
@@ -94,40 +128,86 @@ public class Products extends AppCompatActivity implements NetworkInterface {
 
     @Override
     public void OnResponse(ResponseModel model) {
-        loading.setVisibility(View.GONE);
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
 
-        Gson gson = new Gson();
+        if (Fragment_Category.x == 1) {
+            Fragment_Category.x = 0;
 
-        ModelCategoryProduct categoryProduct = gson.fromJson(String.valueOf(model.getJsonObject()),ModelCategoryProduct.class);
-        productdata = categoryProduct.getData();
+            Gson gson = new Gson();
 
-        for (int i = 0; i< productdata.length; i++){
+            ModelAllProduct allProducts = gson.fromJson(String.valueOf(model.getJsonObject()), ModelAllProduct.class);
+            selectedItems = allProducts.getSelectedItems();
 
-            ModelCategoryDatum datum = new ModelCategoryDatum();
+            for (int i = 0; i < selectedItems.length; i++) {
 
-            datum.setDescription(productdata[i].getDescription());
-            datum.setId(productdata[i].getId());
-            datum.setImage(productdata[i].getImage());
-            datum.setPrice(productdata[i].getPrice());
-            datum.setQtyStock(productdata[i].getQtyStock());
-            datum.setTitle(productdata[i].getTitle());
+                ModelAllSelectedItem selectedItem = new ModelAllSelectedItem();
 
-            productsModelList.add(datum);
+                selectedItem.setDescription(selectedItems[i].getDescription());
+                selectedItem.setId(selectedItems[i].getId());
+                selectedItem.setImage(selectedItems[i].getImage());
+                selectedItem.setPrice(selectedItems[i].getPrice());
+                selectedItem.setQtyStock(selectedItems[i].getQtyStock());
+                selectedItem.setTitle(selectedItems[i].getTitle());
+                selectedItem.setPriceAfterDiscount(selectedItems[i].getPriceAfterDiscount());
 
+                selectedItemList.add(selectedItem);
+
+            }
+            if (selectedItemList.size() == 0) {
+
+                txtNoItem.setVisibility(View.VISIBLE);
+
+            } else {
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                RcyProductsSelectedAdapter adabter = new RcyProductsSelectedAdapter(selectedItemList, this);
+                recyclerView.setAdapter(adabter);
+            }
+
+
+        } else {
+            Gson gson = new Gson();
+            Fragment_Category.x = 0;
+
+            ModelCategoryProduct categoryProduct = gson.fromJson(String.valueOf(model.getJsonObject()), ModelCategoryProduct.class);
+            productdata = categoryProduct.getData();
+
+            for (int i = 0; i < productdata.length; i++) {
+
+                ModelCategoryDatum datum = new ModelCategoryDatum();
+
+                datum.setDescription(productdata[i].getDescription());
+                datum.setId(productdata[i].getId());
+                datum.setImage(productdata[i].getImage());
+                datum.setPrice(productdata[i].getPrice());
+                datum.setQtyStock(productdata[i].getQtyStock());
+                datum.setTitle(productdata[i].getTitle());
+                datum.setPriceAfterDiscount(productdata[i].getPriceAfterDiscount());
+
+                productsModelList.add(datum);
+
+            }
+            if (productsModelList.size() == 0) {
+
+                txtNoItem.setVisibility(View.VISIBLE);
+
+            } else {
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                RcyProductsAdapter adabter = new RcyProductsAdapter(productsModelList, this);
+                recyclerView.setAdapter(adabter);
+            }
         }
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        RcyProductsAdapter adabter = new RcyProductsAdapter(productsModelList,this);
-        recyclerView.setAdapter(adabter);
-
 
 
     }
 
     @Override
     public void OnError(VolleyError error) {
-        loading.setVisibility(View.GONE);
-
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }

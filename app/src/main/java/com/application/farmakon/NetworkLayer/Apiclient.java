@@ -33,7 +33,12 @@ public enum Apiclient
     SEN_ORDER("order-items", Arrays.asList("products","image_urls","notes","address_id"),12),
     GET_PERSONAL_INFO("my-personal-info", null,13),
     GET_USER_ADDRESS("my-address", null,14),
-    GET_HOME("home", null,15);
+    GET_HOME("home", null,15),
+    GET_NOTIFICATION("notification", null,16),
+    GET_PRODUCTS("selected-products", null,17),
+    SEARCH_PRODUCT("search-products", Collections.singletonList("key"),18);
+
+
 
 
 
