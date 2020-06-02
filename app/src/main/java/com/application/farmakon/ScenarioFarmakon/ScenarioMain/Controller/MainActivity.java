@@ -18,6 +18,9 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +46,8 @@ import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragm
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentNotification.Controller.Fragment_Notification;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Products;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllProduct;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllSelectedItem;
 import com.application.farmakon.ScenarioFarmakon.ScenarioVouchers.Controller.Vouchers;
 import com.application.farmakon.Utils.TinyDB;
 import com.application.farmakon.local_data.send_data;
@@ -55,6 +60,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -70,7 +78,12 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
     StorageReference storageReference;
     LinearLayout loading;
     TinyDB tinyDB;
-    EditText edittoolsearch;
+    AutoCompleteTextView edittoolsearch;
+    int x = 0;
+    ModelAllSelectedItem[] selectedItems;
+    private List<String> selectedItemList = new ArrayList<String>();
+
+    private static String[] searchList;
 
 
     @Override
@@ -85,7 +98,12 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
         edittoolsearch = findViewById(R.id.editToolSearch);
         navigation = findViewById(R.id.navigation);
         fragmentManager = getSupportFragmentManager();
+        loading = findViewById(R.id.loading);
 
+
+        loading.setVisibility(View.VISIBLE);
+        x = 1;
+        new Apicalls(MainActivity.this, MainActivity.this).get_all_products();
 
         if (Product_Details.opencart == 1) {
 
@@ -98,20 +116,20 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
 
         } else {
 
-            lineartoolbar.setVisibility(View.GONE);
+            lineartoolbar.setVisibility(View.VISIBLE);
             FragmentTransaction fr = MainActivity.this.getSupportFragmentManager().beginTransaction();
-            fr.replace(R.id.fragment_container, new Fragment_Home(), "Home_Fragment");
+            fr.replace(R.id.fragment_container, new Fragment_Category());
             fr.addToBackStack(null);
             fr.commit();
-            navigation.setSelectedItemId(R.id.icon_home);
+            navigation.setSelectedItemId(R.id.icon_category);
 
         }
 
 
         drawerLayout = findViewById(R.id.drawer);
 
+
         txtdissmiss = findViewById(R.id.txtDismiss);
-        loading = findViewById(R.id.loading);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -169,6 +187,48 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
                 drawerLayout.closeDrawer(Gravity.START);
             }
         });
+
+
+        edittoolsearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+
+                    if (edittoolsearch.getText().toString().equals("")) {
+
+                        edittoolsearch.setError("Please Enter Your Search Word");
+                        YoYo.with(Techniques.Shake)
+                                .duration(700)
+                                .repeat(1)
+                                .playOn(findViewById(R.id.editToolSearch));
+
+                    } else {
+
+                        tinyDB = new TinyDB(MainActivity.this);
+                        tinyDB.putString("search_word", edittoolsearch.getText().toString());
+                        Fragment_Category.x = 2;
+                        startActivity(new Intent(MainActivity.this, Products.class));
+
+                    }
+                }
+                return false;
+            }
+        });
+
+        
+        edittoolsearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                tinyDB = new TinyDB(MainActivity.this);
+                tinyDB.putString("search_word", selectedItemList.get(position));
+                Fragment_Category.x = 2;
+                startActivity(new Intent(MainActivity.this, Products.class));
+                
+            }
+        });
+
+
     }
 
 
@@ -192,32 +252,6 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
                 } else {
                     drawerLayout.openDrawer(Gravity.START);
                 }
-            }
-        });
-
-        edittoolsearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
-
-                    if (edittoolsearch.getText().toString().equals("")) {
-
-                        edittoolsearch.setError("Please Enter Your Search Word");
-                        YoYo.with(Techniques.Shake)
-                                .duration(700)
-                                .repeat(1)
-                                .playOn(findViewById(R.id.editToolSearch));
-
-                    } else {
-
-                        tinyDB = new TinyDB(MainActivity.this);
-                        tinyDB.putString("search_word",edittoolsearch.getText().toString());
-                        Fragment_Category.x = 2;
-                        startActivity(new Intent(MainActivity.this, Products.class));
-
-                    }
-                }
-                return false;
             }
         });
 
@@ -448,16 +482,34 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
     public void OnResponse(ResponseModel model) {
         loading.setVisibility(View.GONE);
 
+        if (x == 1) {
+            x = 0;
 
-        tinyDB = new TinyDB(MainActivity.this);
-        Gson gson2 = new Gson();
-        ModelLogout logouta = gson2.fromJson(model.getJsonObject().toString(), ModelLogout.class);
-        send_data.userId_check(MainActivity.this, false);
-        send_data.token(MainActivity.this, "0");
-        send_data.user_id(this, "0");
-        startActivity(new Intent(MainActivity.this, SignIn.class));
-        finish();
+            Gson gson = new Gson();
 
+            ModelAllProduct allProducts = gson.fromJson(String.valueOf(model.getJsonObject()), ModelAllProduct.class);
+            selectedItems = allProducts.getSelectedItems();
+
+            for (int i = 0; i < selectedItems.length; i++) {
+
+                selectedItemList.add(selectedItems[i].getTitle());
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, selectedItemList);
+            edittoolsearch.setAdapter(adapter);
+
+        } else {
+
+            tinyDB = new TinyDB(MainActivity.this);
+            Gson gson2 = new Gson();
+            ModelLogout logouta = gson2.fromJson(model.getJsonObject().toString(), ModelLogout.class);
+            send_data.userId_check(MainActivity.this, false);
+            send_data.token(MainActivity.this, "0");
+            send_data.user_id(this, "0");
+            startActivity(new Intent(MainActivity.this, SignIn.class));
+            finish();
+
+        }
 
     }
 
