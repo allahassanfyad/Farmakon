@@ -68,6 +68,7 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/editPersonalName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_36sdp"
@@ -78,7 +79,7 @@
                 android:inputType="text"
                 android:singleLine="true"
                 android:textColor="@color/colorLightBlue"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
 
@@ -109,6 +110,7 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/editPersonalEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_36sdp"
@@ -164,6 +166,7 @@
 
 
                 <EditText
+                    android:id="@+id/editPersonalYear"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/raduis_all_strok_gradiant_slim"
@@ -171,12 +174,14 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:text="1980"
+                    android:maxLength="4"
+                    android:hint="Year"
                     android:textColor="@color/colorLightBlue"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editPersonalMonth"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -186,12 +191,14 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:text="07"
+                    android:maxLength="2"
+                    android:hint="Month"
                     android:textColor="@color/colorLightBlue"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editPersonalDay"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/raduis_all_strok_gradiant_slim"
@@ -199,9 +206,10 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:text="10"
+                    android:maxLength="2"
+                    android:hint="Day"
                     android:textColor="@color/colorLightBlue"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -247,6 +255,7 @@
 
 
                 <CheckBox
+                    android:id="@+id/checkPersonalMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/custom_checkbox"
@@ -263,6 +272,7 @@
                     android:textStyle="bold" />
 
                 <CheckBox
+                    android:id="@+id/checkPersonalFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -282,6 +292,19 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:background="@drawable/raduis_all_strok_gradiant"
+                android:text="Continue"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->

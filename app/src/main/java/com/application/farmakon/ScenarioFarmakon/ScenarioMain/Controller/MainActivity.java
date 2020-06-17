@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
     TextView txtdissmiss;
     FirebaseStorage storage;
     StorageReference storageReference;
-    LinearLayout loading;
+    public static LinearLayout loading;
     TinyDB tinyDB;
     AutoCompleteTextView edittoolsearch;
     int x = 0;

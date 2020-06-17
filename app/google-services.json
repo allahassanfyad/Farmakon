@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "909915916317",
+    "firebase_url": "https://farmakon-7fe28.firebaseio.com",
+    "project_id": "farmakon-7fe28",
+    "storage_bucket": "farmakon-7fe28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909915916317:android:25d312840bcafde3281ef4",
+        "android_client_info": {
+          "package_name": "com.application.farmakon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909915916317-46535mg3qf8akpqjtimvsnpktq3ect8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.application.farmakon",
+            "certificate_hash": "e5b61228440b756f4639fabe71194f688586e242"
+          }
+        },
+        {
+          "client_id": "909915916317-idhoh81oqk895qhcsffa6fsp9ouosu69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6mR25YfVDIJxYrK6MFu0sk_ZvU3PEL2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909915916317-idhoh81oqk895qhcsffa6fsp9ouosu69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
