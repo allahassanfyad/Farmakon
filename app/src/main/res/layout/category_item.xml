@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/_130sdp"
+    android:layout_height="@dimen/_100sdp"
     android:layout_weight="3"
     android:background="@color/colorw"
     android:orientation="horizontal"
     android:weightSum="9">
 
     <LinearLayout
-        android:layout_width="@dimen/_100sdp"
+        android:layout_width="@dimen/_70sdp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">

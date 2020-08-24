@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorw"
+    android:orientation="vertical"
+    tools:context=".ScenarioFarmakon.ScenarioProducts.Controller.Product_Category">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/txtCategoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:text="Medicines"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linearSubcategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:gravity="center"
+                android:layoutDirection="rtl"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                        android:id="@+id/rcySubCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@color/colorw"
+                        app:shimmer_demo_layout="@layout/sub_category_shimmer"
+                        app:shimmer_demo_layout_manager_type="linear_horizontal" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/rcyAllCategory"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="@dimen/_10sdp"-->
+                <!--                    android:layout_marginTop="@dimen/_10sdp"-->
+                <!--                    android:layout_marginEnd="@dimen/_5sdp"-->
+                <!--                    android:layout_marginBottom="@dimen/_10sdp"-->
+                <!--                    tools:listitem="@layout/products_item"-->
+                <!--                    android:visibility="gone"/>-->
+
+
+                <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                    android:id="@+id/rcyAllCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:shimmer_demo_layout="@layout/placeholder_shimmer"
+                    app:shimmer_demo_layout_manager_type="linear_vertical" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparentLoading"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNoItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Sorry...There Is No Product To Show."
+            android:textColor="@color/colorb"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

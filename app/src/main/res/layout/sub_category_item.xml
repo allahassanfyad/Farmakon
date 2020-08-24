@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_45sdp"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:id="@+id/linearSubcategory"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/raduis_all"
+        android:gravity="center">
+
+
+
+        <TextView
+            android:id="@+id/txtSubcategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text=" Description "
+            android:textColor="@color/colorb"
+            android:textSize="@dimen/_10sdp" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

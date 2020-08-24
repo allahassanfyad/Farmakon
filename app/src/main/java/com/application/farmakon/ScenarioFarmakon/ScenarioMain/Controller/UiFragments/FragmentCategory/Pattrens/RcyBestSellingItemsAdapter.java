@@ -1,4 +1,4 @@
-package com.application.farmakon.ScenarioFarmakon.ScenarioAllCategory.Pattrens;
+package com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Pattrens;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,24 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.farmakon.R;
-import com.application.farmakon.ScenarioFarmakon.ScenarioAllCategory.Model.ModelDatum;
-import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.Category_Model;
-import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Product_Category;
-import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Controller.Products;
+import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Model.ModelSelectedItem;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProductDetails.Controller.Product_Details;
 import com.application.farmakon.Utils.TinyDB;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class RcyAllCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class RcyBestSellingItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
     TinyDB tinyDB;
-    List<ModelDatum> mMainGridList;
+    List<ModelSelectedItem> mMainGridList;
     Context mContext;
 
 
-    public RcyAllCategoryAdapter(List<ModelDatum> songsList, Context context) {
+    public RcyBestSellingItemsAdapter(List<ModelSelectedItem> songsList, Context context) {
         this.mMainGridList = songsList;
         this.mContext = context;
 
@@ -39,7 +37,7 @@ public class RcyAllCategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View ads = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_category_item,parent,false);
+        View ads = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
         MainItemHolder mainHolder = new MainItemHolder(ads) ;
         return mainHolder;
     }
@@ -55,7 +53,7 @@ public class RcyAllCategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         tinyDB = new TinyDB(mContext);
         int viewType = getItemViewType(position);
-        final ModelDatum catrgory  = mMainGridList.get(position);
+        final ModelSelectedItem catrgory  = mMainGridList.get(position);
 
 
         MainItemHolder mainHolder =(MainItemHolder) holder;
@@ -67,17 +65,18 @@ public class RcyAllCategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 .load(catrgory.getImage())
                 .placeholder(R.drawable.img)
                 .into(mainHolder.imageView);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                tinyDB = new TinyDB(mContext);
+                tinyDB.putString("product_description",catrgory.getDescription());
+                tinyDB.putString("product_image",catrgory.getImage());
+                tinyDB.putString("product_price",catrgory.getPrice());
+                tinyDB.putString("product_title",catrgory.getTitle());
+                tinyDB.putString("product_id", String.valueOf(catrgory.getId()));
 
-                tinyDB.putString("categoryName", String.valueOf(mMainGridList.get(position).getTitle()));
-                tinyDB.putString("categoryID", String.valueOf(mMainGridList.get(position).getId()));
 
-                mContext.startActivity(new Intent(mContext, Product_Category.class));
+                mContext.startActivity(new Intent(mContext, Product_Details.class));
 
             }
         });

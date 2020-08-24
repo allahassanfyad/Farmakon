@@ -3,10 +3,9 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 
 
-
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.application.farmakon"
@@ -120,6 +119,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.firebase:firebase-auth:19.3.0'
 
+
     //Facebook Loading Library shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
+//    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 }

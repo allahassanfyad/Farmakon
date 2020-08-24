@@ -36,7 +36,12 @@ public enum Apiclient
     GET_HOME("home", null,15),
     GET_NOTIFICATION("notification", null,16),
     GET_PRODUCTS("selected-products", null,17),
-    SEARCH_PRODUCT("search-products", Collections.singletonList("key"),18);
+    SEARCH_PRODUCT("search-products", Collections.singletonList("key"),18),
+    GET_PARTNER("partners", null ,19),
+    GET_SUB_CATEGORY("sub-categories", Collections.singletonList("category_id") ,20),
+    GET_PARTNER_PRODUCT("partner-products", Collections.singletonList("partner_id") ,21);
+
+
 
 
 

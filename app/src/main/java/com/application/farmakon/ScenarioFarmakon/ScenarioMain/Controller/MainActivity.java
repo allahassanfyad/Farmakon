@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NetworkInterface 
         loading = findViewById(R.id.loading);
 
 
-        loading.setVisibility(View.VISIBLE);
+//        loading.setVisibility(View.VISIBLE);
         x = 1;
         new Apicalls(MainActivity.this, MainActivity.this).get_all_products();
 

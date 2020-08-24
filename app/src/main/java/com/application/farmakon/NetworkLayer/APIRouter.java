@@ -116,6 +116,7 @@ public class APIRouter {
             for (int index = 0; index < params.size(); index++) {
                 object.put(params.get(index), values.get(index));
             }
+            Log.e("arraylist", object.toString());
         }
 
 
@@ -170,6 +171,72 @@ public class APIRouter {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestHandler.getInstance(context).addToRequestQueue(sr);
     }
+
+    public void makeAdvancedRequest1(String url, final int method, final List<String> params, final List<String> values, final HashMap<String, String> body) throws JSONException {
+        Log.e("url", url);
+
+        networkInterface.OnStart();
+
+        JSONObject object = new JSONObject();
+        if (params != null && values != null) {
+            for (int index = 0; index < params.size(); index++) {
+                object.put(params.get(index), values.get(index));
+            }
+            Log.e("arraylist", object.toString());
+        }
+
+
+        JsonObjectRequest sr = new JsonObjectRequest(method, url, object,
+
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        ResponseModel model = new ResponseModel(0, response);
+
+                        networkInterface.OnResponse(model);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                networkInterface.OnError(error);
+
+            }
+
+        }) {
+            /*  @Override
+              protected Map<String, String> getParams(){
+                  HashMap<String, String> hashMap = new HashMap<>();
+                  if(params != null && values!=null)
+                  {
+                      for(int i = 0; i<params.size();i++)
+                      {
+                          Log.e("params",params.get(i)+","+values.get(i));
+                          hashMap.put(params.get(i),values.get(i));
+                      }
+                  }
+                  return hashMap;
+              }
+  */
+            @Override
+            public Map<String, String> getHeaders() {
+                final HashMap<String, String> header = new HashMap<>();
+                header.put("Accept", "application/json");
+                header.put("Content-Type", "application/json");
+                return header;
+            }
+
+
+        };
+        sr.setShouldCache(false);
+        sr.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 7,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestHandler.getInstance(context).addToRequestQueue(sr);
+    }
+
 
     public void makeAdvancedRequest2(String url, final int method, final List<String> params, final JSONObject values, final HashMap<String, String> body) throws JSONException {
         Log.e("url", url);

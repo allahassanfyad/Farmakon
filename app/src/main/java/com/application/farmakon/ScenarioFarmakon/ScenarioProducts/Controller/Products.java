@@ -14,11 +14,14 @@ import com.application.farmakon.NetworkLayer.NetworkInterface;
 import com.application.farmakon.NetworkLayer.ResponseModel;
 import com.application.farmakon.R;
 import com.application.farmakon.ScenarioFarmakon.ScenarioMain.Controller.UiFragments.FragmentCategory.Controller.Fragment_Category;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelProductPartnerDatum;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelProductPartnerProduct;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllProduct;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelAllSelectedItem;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryDatum;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Model.ModelCategoryProduct;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Pattrens.RcyProductsAdapter;
+import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Pattrens.RcyProductsPartnerAdapter;
 import com.application.farmakon.ScenarioFarmakon.ScenarioProducts.Pattrens.RcyProductsSelectedAdapter;
 import com.application.farmakon.Utils.TinyDB;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -37,6 +40,8 @@ public class Products extends AppCompatActivity implements NetworkInterface {
     ModelAllSelectedItem[] selectedItems;
     private List<ModelAllSelectedItem> selectedItemList = new ArrayList<>();
     private ShimmerFrameLayout shimmerFrameLayout;
+    ModelProductPartnerDatum[] partnerData;
+    private List<ModelProductPartnerDatum> productPartnerList = new ArrayList<>();
 
 
     @Override
@@ -62,6 +67,12 @@ public class Products extends AppCompatActivity implements NetworkInterface {
 
 
             new Apicalls(Products.this, Products.this).get_all_products();
+
+        } else if (Fragment_Category.x == 3) {
+
+            String partner_id = tinyDB.getString("partner_id");
+            new Apicalls(Products.this, Products.this).get_Partner_product(partner_id);
+
 
         } else {
 
@@ -163,6 +174,40 @@ public class Products extends AppCompatActivity implements NetworkInterface {
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 RcyProductsSelectedAdapter adabter = new RcyProductsSelectedAdapter(selectedItemList, this);
+                recyclerView.setAdapter(adabter);
+            }
+
+
+        } else if (Fragment_Category.x == 3) {
+
+            Gson gson = new Gson();
+            ModelProductPartnerProduct productPartnerProduct = gson.fromJson(String.valueOf(model.getJsonObject()), ModelProductPartnerProduct.class);
+            partnerData = productPartnerProduct.getData();
+
+            for (int i = 0; i < partnerData.length; i++) {
+
+                ModelProductPartnerDatum partnerDatum = new ModelProductPartnerDatum();
+
+                partnerDatum.setDescription(partnerData[i].getDescription());
+                partnerDatum.setId(partnerData[i].getId());
+                partnerDatum.setImage(partnerData[i].getImage());
+                partnerDatum.setPrice(partnerData[i].getPrice());
+                partnerDatum.setQtyStock(partnerData[i].getQtyStock());
+                partnerDatum.setTitle(partnerData[i].getTitle());
+                partnerDatum.setPriceAfterDiscount(partnerData[i].getPriceAfterDiscount());
+
+                productPartnerList.add(partnerDatum);
+
+            }
+
+            if (productPartnerList.size() == 0) {
+
+                txtNoItem.setVisibility(View.VISIBLE);
+
+            } else {
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                RcyProductsPartnerAdapter adabter = new RcyProductsPartnerAdapter(productPartnerList, this);
                 recyclerView.setAdapter(adabter);
             }
 
